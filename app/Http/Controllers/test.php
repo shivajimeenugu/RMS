@@ -9,6 +9,6 @@ class test extends Controller
     public function teat()
     {
     
-     return 5;
+     return 10;
     }
 }
