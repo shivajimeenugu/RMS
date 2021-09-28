@@ -8,6 +8,9 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+use Schema;
 
 class RegisterController extends Controller
 {
@@ -65,6 +68,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
+        Schema::connection('mysql')->create($data['name']."Table", function($table)
+        {
+            $table->increments('id');
+            $table->foreignId('transactions_id')->constrained()->onDelete('cascade');
+            $table->string("participants");
+            $table->timestamps();
+        });
+        
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
