@@ -8,6 +8,7 @@ class test extends Controller
 {
     public function teat()
     {
-     return 2;
+    
+     return 5;
     }
 }
