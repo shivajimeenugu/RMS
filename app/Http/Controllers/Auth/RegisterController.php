@@ -69,14 +69,14 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
-        Schema::connection('mysql')->create($data['name']."Table", function($table)
+        Schema::connection('mysql')->create(str_replace(" ","",$data['name']."Table"), function($table)
         {
             $table->increments('id');
             $table->foreignId('transactions_id')->constrained()->onDelete('cascade');
             $table->string("participants");
             $table->timestamps();
         });
-        
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
