@@ -16,8 +16,9 @@ class CreateTransactionsTable extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('users_id')->constrained()->onDelete('cascade');
-            $table->integer("amount");
-            $table->boolean("status");
+            $table->integer("amount")->default(0);
+            $table->boolean("status")->default(1);
+            $table->string("remarks");
             $table->timestamps();
         });
     }
