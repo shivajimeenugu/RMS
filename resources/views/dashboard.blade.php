@@ -3,23 +3,22 @@
 
 @section('style')
 <style>
+    .bag{
+        background-image: url("{{asset('images/Summary.png')}}");
+        background-repeat: no-repeat;
+    background-size: cover;
+    }
 
-.bag{
-    background-image: url("{{asset('images/Summary.png')}}");
-    background-repeat: no-repeat;
-background-size: cover;
-}
-
-input.lgcheck{
-width:20px;
-height: 20px;
-}
+    input.lgcheck{
+    width:20px;
+    height: 20px;
+    }
 </style>
 @stop
 
 @section('content')
     <div class="h-screen flex justify-center bg-gray-100">
-        <div class="w-full h-screen bag">
+        <div class="lg:w-4/12 w-full h-screen bag">
             <div class="pb-4">
                 <div class="p-2 mt-2 ml-4">
                     <p class="text-xl font-bold text-gray-700">
@@ -28,7 +27,7 @@ height: 20px;
                          Transaction Summary</p>
                 </div>
                 <div class="mx-10 mt-5">
-                    <input type="Int" name="amount" id="" placeholder="Amount" class="px-4 py-4  text-lg placeholder-gray-600 font-bold rounded-lg border text-bold border-blue-400 text-blue-600 w-full">  
+                    <input type="Int" name="amount" id="" placeholder="Amount" class="px-4 py-4  text-lg placeholder-gray-600 font-bold rounded-lg border text-bold border-blue-400 text-gray-600 w-full">  
                 </div>
                 <div class="mt-4 mx-8 flex justify-center">
                     <input type="text" name="title" id="title" placeholder="Item Details" class="px-2 py-2 border border-blue-400 placeholder-gray-600 font-bold pl-5  rounded w-8/12">

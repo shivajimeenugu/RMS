@@ -26,3 +26,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/add', [App\Http\Controllers\CoreController::class, 'AddTransaction'])->name('add');
 
 Route::get('dashboard',[dashboard::class,'index'])->name('dashboard');
+Route::get('assets',[dashboard::class,'assets'])->name('assets');

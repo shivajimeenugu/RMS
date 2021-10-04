@@ -10,4 +10,8 @@ class dashboard extends Controller
         return view("dashboard");
     }
 
+    public function assets(){
+        return view('assets');
+    }
+
 }
