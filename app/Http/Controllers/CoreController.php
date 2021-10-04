@@ -25,18 +25,12 @@ class CoreController extends Controller
             "amount"=>$amount,
             "patys"=>$partys,
             "remarks"=>$remarks
+        ]);
 
-        ])->get();
-
-        return response(['message' => $TransactionDetails], 200);
-        /*
+        // return response(['message' => $TransactionDetails], 200);
         $OwnerTableName=str_replace(" ","",$ownerName)."table";
 
-        $data=DB::select(DB::raw('insert into '.$OwnerTableName.' '));*/
-
-
-
-
+        $data=DB::select(DB::raw('insert into '.$OwnerTableName.' values('.$TransactionDetails->id.')'));
 
 
     }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\dashboard;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -23,3 +24,5 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/add', [App\Http\Controllers\CoreController::class, 'AddTransaction'])->name('add');
+
+Route::get('dashboard',[dashboard::class,'index'])->name('dashboard');

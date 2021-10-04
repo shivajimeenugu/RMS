@@ -17,6 +17,7 @@ class CreateTransactionsTable extends Migration
             $table->id();
             $table->foreignId('users_id')->constrained()->onDelete('cascade');
             $table->integer("amount")->default(0);
+            $table->string("patys");
             $table->boolean("status")->default(1);
             $table->string("remarks");
             $table->timestamps();
