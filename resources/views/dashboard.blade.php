@@ -46,7 +46,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="px-3 overflow-y-auto" style="height: 350px">
+                <div class="px-3 overflow-y-auto" style="height: 300px">
                     <div class="bg-white mx-1 py-2 items-center px-5 my-2 flex justify-between rounded-2xl border border-white">
                         <div class="font-bold text-gray-700">Room Mate-1</div>
                         <div class="px-2  bg-yellow-400 py-1 rounded-xl text-white font-bold" style="background-color: #ff9d4e">button</div>
@@ -117,11 +117,17 @@
                     </div>
                 </div>
                 <div class="" style="height: 100px">
-                    <div class="flex justify-start">
-                        <button class="rounded-full p-1 ml-10 mt-2 bg-white text-xs px-2 text-gray-700 font-bold border-2 border-gray-700">+ADD</button>
-                        <button class="rounded-full p-1 ml-5 mt-2 bg-white text-xs px-2 text-gray-700 font-bold border-2 border-gray-700">-REMOVE</button>
+                    <div class="">
+                        <div class="bg-white rounded-2xl border border-blue-600 p-3 text-xl  w-full flex jutify-start mt-2 overflow-x-auto">
+                            <div class="rounded-full bg-green-300 p-2 mx-2 my-2 flex justify-between">
+                                <div class="pl-2 text-sm text-gray-700 font-bold mr-4">Name</div>
+                                <button class="bg-red-400 rounded-full px-2 py-1 text-sm font-bold">X</button>
+                            </div>
+                        </div>
+                        {{-- <button class="rounded-full p-1 ml-10 mt-2 bg-white text-xs px-2 text-gray-700 font-bold border-2 border-gray-700">+ADD</button>
+                        <button class="rounded-full p-1 ml-5 mt-2 bg-white text-xs px-2 text-gray-700 font-bold border-2 border-gray-700">-REMOVE</button> --}}
                     </div>
-                    <div class="flex justify-center items-center mt-2">
+                    <div class="flex justify-center items-center mt-1">
                         <button class="font-bold text-white text-xl p-2 border border-blue-600 rounded-full px-16 bg-gradient-to-r from-blue-700 to-blue-400 ...">
                             Submit
                         </button>

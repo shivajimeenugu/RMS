@@ -14,4 +14,8 @@ class dashboard extends Controller
         return view('assets');
     }
 
+    public function login(){
+        return view('login');
+    }
+
 }
