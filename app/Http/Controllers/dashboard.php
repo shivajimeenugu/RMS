@@ -22,4 +22,8 @@ class dashboard extends Controller
         return view('login');
     }
 
+    public function history(){
+        return view('history');
+    }
+
 }

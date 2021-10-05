@@ -29,3 +29,4 @@ Route::get('dashboard',[dashboard::class,'index'])->name('dashboard');
 Route::get('assets',[dashboard::class,'assets'])->name('assets');
 Route::get('assets/login',[dashboard::class,'login'])->name('assets-login');
 Route::get('liabalities',[dashboard::class,'liabalities'])->name('liabalities');
+Route::get('history',[dashboard::class,'history'])->name('history');

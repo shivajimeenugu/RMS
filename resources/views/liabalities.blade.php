@@ -136,4 +136,58 @@
         </div>
 
     </div>
+
+
+
+    
+<script>
+
+    mobiscroll.setOptions({
+        locale: mobiscroll.localeEn,  // Specify language like: locale: mobiscroll.localePl or omit setting to use default
+        theme: 'ios',                 // Specify theme like: theme: 'ios' or omit setting to use default
+            themeVariant: 'light'     // More info about themeVariant: https://docs.mobiscroll.com/5-10-1/datetime#opt-themeVariant
+    });
+    
+    $(function () {
+    
+        // Mobiscroll Date & Time initialization
+        $('#demo-mobile-picker-input').mobiscroll().datepicker({
+            
+            controls: ['date'],
+            touchUi: true             // More info about touchUi: https://docs.mobiscroll.com/5-10-1/datetime#opt-touchUi
+        });
+    
+        var instance = $('#demo-mobile-picker-button').mobiscroll().datepicker({
+            
+            controls: ['date'],
+            touchUi: true,            // More info about touchUi: https://docs.mobiscroll.com/5-10-1/datetime#opt-touchUi
+            showOnClick: false,       // More info about showOnClick: https://docs.mobiscroll.com/5-10-1/datetime#opt-showOnClick
+            showOnFocus: false,       // More info about showOnFocus: https://docs.mobiscroll.com/5-10-1/datetime#opt-showOnFocus
+        }).mobiscroll('getInst');
+        
+        instance.setVal(new Date(), true);
+    
+        // Mobiscroll Date & Time initialization
+        $('#demo-mobile-picker-mobiscroll').mobiscroll().datepicker({
+            
+            controls: ['date'],
+            touchUi: true             // More info about touchUi: https://docs.mobiscroll.com/5-10-1/datetime#opt-touchUi
+        });
+    
+        // Mobiscroll Date & Time initialization
+        $('#demo-mobile-picker-inline').mobiscroll().datepicker({
+            
+            controls: ['date'],
+            touchUi: true,            // More info about touchUi: https://docs.mobiscroll.com/5-10-1/datetime#opt-touchUi
+            display: 'inline'         // Specify display mode like: display: 'bottom' or omit setting to use default
+        });
+    
+        $('#show-mobile-date-picker').click(function () {
+            instance.open();
+            return false;
+        });
+    
+    });
+</script>
+
 @endsection
