@@ -22,7 +22,6 @@
             <div class="pb-4">
                 <div class="p-2 mt-2 ml-4">
                     <p class="text-xl font-bold text-gray-700">
-                        {{-- <i class="fas fa-arrow-left"></i> --}}
                         <i class="fas fa-align-left"></i>
                          Transaction Summary</p>
                 </div>
@@ -118,7 +117,7 @@
                 </div>
                 <div class="" style="height: 100px">
                     <div class="">
-                        <div class="bg-white rounded-2xl border border-blue-600 p-3 text-xl  w-full flex jutify-start mt-2 overflow-x-auto">
+                        <div class="bg-white rounded-2xl border border-blue-600 p-2 text-xl  w-full flex jutify-start mt-2 overflow-x-auto">
                             <div class="rounded-full bg-green-300 p-2 mx-2 my-2 flex justify-between">
                                 <div class="pl-2 text-sm text-gray-700 font-bold mr-4">Name</div>
                                 <button class="bg-red-400 rounded-full px-2 py-1 text-sm font-bold">X</button>

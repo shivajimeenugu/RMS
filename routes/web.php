@@ -27,3 +27,5 @@ Route::get('/add', [App\Http\Controllers\CoreController::class, 'AddTransaction'
 
 Route::get('dashboard',[dashboard::class,'index'])->name('dashboard');
 Route::get('assets',[dashboard::class,'assets'])->name('assets');
+Route::get('assets/login',[dashboard::class,'login'])->name('assets-login');
+Route::get('liabalities',[dashboard::class,'liabalities'])->name('liabalities');
