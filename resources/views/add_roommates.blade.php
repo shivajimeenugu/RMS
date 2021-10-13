@@ -45,7 +45,7 @@
                     @if ($user->id==$ownerid)
                     <div class="bg-white   mb-4 mt-2 shadow-lg  border-b py-4 rounded-2xl  items-center  flex justify-between px-4 ">
                         <div class="font-bold text-gray-700 text-2xl ">{{$user->name}}<span class="text-xs ml-3 px-2 font-bold bg-blue-500 text-white rounded py-0.5">Current User</span></div>
-                        <button type="button" class="font-bold disabled  text-white bg-red-400 border border-red-700 px-2 py-1 rounded-full" disabled>Remove</button>
+                        <button type="button" class="font-bold disabled:opacity-90  text-white bg-red-400 border border-red-700 px-2 py-1 rounded-full" disabled>Remove</button>
                     </div>
                     @else
                     <div class="bg-white   mb-4 mt-2 shadow-lg  border-b py-4 rounded-2xl  items-center  flex justify-between px-4 ">
