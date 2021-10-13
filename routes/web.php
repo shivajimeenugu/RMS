@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [dashboard::class, 'portfolio'])->name('home');
-
+Route::get('/test', [dashboard::class, 'test'])->name('test');
 Auth::routes();
 
 Route::get('/home', [dashboard::class, 'portfolio'])->name('home2');

@@ -120,6 +120,10 @@ class dashboard extends Controller
         return view("history");
     }
 
+    public function test(){
+        return response("True",200);
+    }
+
     //DoneRecive
     public function DoneRecive(Request $req){
         $cuser=$req->user()->id;
