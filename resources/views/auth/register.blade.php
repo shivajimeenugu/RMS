@@ -1,140 +1,126 @@
 @extends('layouts.app')
 
+
+@section('style')
+<style>
+    .bag{
+        background-image: url("{{asset('images/Summary.png')}}");
+        background-repeat: no-repeat;
+    background-size: cover;
+    }
+    input.lgcheck{
+    width:20px;
+    height: 20px;
+    }
+</style>
+@stop
+
 @section('content')
-
-<body class="font-mono bg-gray-400">
-    <!-- Container -->
-    <div class="container mx-auto">
-        <div class="flex justify-center px-6 my-12">
-            <!-- Row -->
-            <div class="w-full xl:w-3/4 lg:w-11/12 flex">
-                <!-- Col -->
-                <div
-                    class="w-full h-auto bg-gray-400 hidden lg:block lg:w-5/12 bg-cover rounded-l-lg"
-                    style="background-image: url('https://source.unsplash.com/Mv9hjnEUHR4/600x800')"
-                ></div>
-                <!-- Col -->
-                <div class="w-full lg:w-7/12 bg-white p-5 rounded-lg lg:rounded-l-none">
-                    <h3 class="pt-4 text-2xl text-center">Create an Account!</h3>
-                    <form class="px-8 pt-6 pb-8 mb-4 bg-white rounded" method="POST" action="{{ route('register') }}">
-                        @csrf
-                        <div class="mb-4 md:flex md:justify-between">
-                            <div class="mb-4 md:mr-2 md:mb-0">
-                                <label class="block mb-2 text-sm font-bold text-gray-700" for="name">
-                                    Name
-                                </label>
-                                <input
-                                    class="w-full px-3 py-2 text-sm leading-tight @error('name') is-invalid border border-red-700 @enderror text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                                    id="name"
-                                    type="text"
-                                    placeholder="Name"
-                                    name="name"
-                                />
-                                @error('name')
-                                    <span class="text-red" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="md:ml-2">
-                                <label class="block mb-2 text-sm font-bold text-gray-700" for="phone">
-                                    Mobile
-                                </label>
-                                <input
-                                    class="w-full px-3 py-2 text-sm leading-tight  text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                                    id="phone"
-                                    type="number"
-                                    placeholder="+91 xxxx xxx xxx"
-                                    name="phone"
-                                />
-                            </div>
-                        </div>
-                        <div class="mb-4">
-                            <label class="block mb-2 text-sm font-bold text-gray-700" for="email">
-                                Email
-                            </label>
-                            <input
-                                class="w-full px-3 py-2 mb-3 text-sm leading-tight @error('email') is-invalid border border-red-700 @enderror text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                                id="email"
-                                type="email"
-                                placeholder="Email"
-                                name="email"
-                                value="{{ old('email') }}"
-                                required autocomplete="email"
-                            />
-                            @error('email')
-                                    <span class="text-red" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                        </div>
-                        <div class="mb-4 md:flex md:justify-between">
-                            <div class="mb-4 md:mr-2 md:mb-0">
-                                <label class="block mb-2 text-sm font-bold text-gray-700" for="password">
-                                    Password
-                                </label>
-                                <input
-                                    class="w-full px-3 py-2 mb-3 text-sm leading-tight @error('password') is-invalid border border-red-700 @enderror text-gray-700 border border-red-500 rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                                    id="password"
-                                    type="password"
-                                    placeholder="******************"
-                                    required autocomplete="new-password"
-                                    name="password"
-                                />
-
-                                @error('password')
-                                    <span class="text-red" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    <p class="text-xs italic text-red-500">Please choose a password.</p>
-                                @enderror
-                                
-                            </div>
-                            <div class="md:ml-2">
-                                <label class="block mb-2 text-sm font-bold text-gray-700" for="c_password">
-                                    Confirm Password
-                                </label>
-                                <input
-                                    class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                                    id="c_password"
-                                    type="password"
-                                    placeholder="******************"
-                                    name="password_confirmation"
-                                    required autocomplete="new-password"
-                                    
-                                />
-                            </div>
-                        </div>
-                        <div class="mb-6 text-center">
-                            <button
-                                class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
-                                type="submit"
-                            >
-                                Register Account
-                            </button>
-                        </div>
-                        <hr class="mb-6 border-t" />
-                        <div class="text-center">
-                            <a
-                                class="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
-                                href="#"
-                            >
-                                Forgot Password?
-                            </a>
-                        </div>
-                        <div class="text-center">
-                            <a
-                                class="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
-                                href="{{ route('login') }}"
-                            >
-                                Already have an account? Login!
-                            </a>
-                        </div>
-                    </form>
+    <div class="h-screen flex justify-center bg-gray-100">
+        <div class="lg:w-4/12 w-full h-screen h-full grid grid-row-3 bg-blue-700">
+            <div class=" row-span-3">
+            </div>
+            <div class="row-span-4">
+                <div class="flex justify-center mb-20 mt-10">
+                    <h1 class="text-white font-bold text-5xl">RMS</h1>
                 </div>
+                <form class="" method="POST" action="{{ route('register') }}">
+                    @csrf
+                    <div class="flex justify-center  text-white p-2 ">
+                        <div class="flex justify-start items-center  w-10/12 py-2 px-4 border-2 border-white rounded-md  @error('name') is-invalid border-3 border-red-700 @enderror">
+                            <i class="far fa-user text-2xl mr-4"></i>
+                            <div class="text-xl">
+                                <input type="text" name="name" class="bg-blue-700 ml-5 focus:outline-none border-0 placeholder-white text-center w-40" placeholder="Enter Name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mx-10">
+                        @error('name')
+                            <span class="text-white" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="flex justify-center  text-white p-2 ">
+                        <div class="flex justify-start items-center  w-10/12 py-2 px-4 border-2 border-white rounded-md @error('email') is-invalid border-3 border-red-700 @enderror">
+                            <i class="far fa-envelope text-2xl mr-4"></i>
+                            <div class="text-xl">
+                                <input type="email" name="email" class="bg-blue-700 ml-5 focus:outline-none border-0 placeholder-white text-center w-40" placeholder="Email">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mx-10">
+                        @error('email')
+                            <span class="text-white" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="flex justify-center  text-white p-2 ">
+                        <div class="flex justify-start items-center  w-10/12 py-2 px-4 border-2 border-white rounded-md">
+                            <i class="far fa-phone text-2xl mr-4"></i>
+                            <div class="text-xl">
+                                <input type="number" name="phone" class="bg-blue-700 ml-5 focus:outline-none border-0 placeholder-white text-center w-40" placeholder="Mobile Number">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-center  text-white p-2 ">
+                        <div class="flex justify-start items-center  w-10/12 py-2 px-4 border-2 border-white rounded-md @error('password') is-invalid border-3 border-red-700 @enderror">
+                            <i class="far fa-lock text-2xl mr-4"></i>
+                            <div class="text-xl">
+                                <input type="password" name="password" class="bg-blue-700 ml-5 focus:outline-none border-0 placeholder-white text-center w-40" placeholder="password">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mx-10">
+                        @error('password')
+                            <span class="text-white" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="flex justify-center  text-white p-2 ">
+                        <div class="flex justify-start items-center  w-10/12 py-2 px-4 border-2 border-white rounded-md @error('password') is-invalid border-3 border-red-700 @enderror">
+                            <i class="far fa-lock text-2xl mr-4"></i>
+                            <div class="text-xl">
+                                <input type="password" name="password_confirmation" class="bg-blue-700 ml-5 focus:outline-none border-0 placeholder-white text-center w-40" placeholder="confirm password">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mx-10">
+                        @error('password')
+                            <span class="text-white" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="flex justify-center  text-white p-2 ">
+                        <div class="flex justify-start items-center  w-10/12 py-2 px-4 border-2 border-white rounded-md  @error('name') is-invalid border-3 border-red-700 @enderror">
+                            <i class="far fa-money-check-edit-alt text-2xl mr-4"></i>
+
+                            <div class="text-xl">
+                                <input type="text" name="upiid" class="bg-blue-700 ml-5 focus:outline-none border-0 placeholder-white text-center w-40" placeholder="Enter UPI ID (VPA)">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mx-10">
+                        @error('upiid')
+                            <span class="text-white" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="flex justify-center mb-2 ">
+                        <button type="submit" class="bg-white text-blue-800 shadow-xl border border-gray-800 text-xl rounded-md w-full py-2 font-bold mx-10">REGISTER</button>
+                    </div>
+                    <div class="flex justify-center mx-10 text-white text-lg  font-bold">
+                        <a href="{{route('login')}}" class="mr-2">Already Register?</a>
+                        <a href="{{route('login')}}">Sign in</a>
+                    </div>
+                </form>
+            </div>
+            <div class=" row-span-1">
             </div>
         </div>
     </div>
-</body>
-
 @endsection

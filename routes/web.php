@@ -1,5 +1,6 @@
 <?php
-
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CoreController;
 use App\Http\Controllers\dashboard;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -15,15 +16,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
+Route::get('/', [dashboard::class, 'portfolio'])->name('home');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/add', [App\Http\Controllers\CoreController::class, 'AddTransaction'])->name('add');
+Route::get('/home', [dashboard::class, 'portfolio'])->name('home2');
+Route::get('/add', [CoreController::class, 'AddTransaction'])->name('add');
+Route::get('/getme', [CoreController::class, 'GetMe'])->name('getme');
 
 Route::get('dashboard',[dashboard::class,'index'])->name('dashboard');
-Route::get('assets',[dashboard::class,'assets'])->name('assets');
+Route::get('balancesheet',[dashboard::class,'balancesheet'])->name('balancesheet');
+Route::get('liabalities',[dashboard::class,'liabalities'])->name('liabalities');
+
+Route::get('add_roommates',[dashboard::class,'add_roommates'])->name('add_roommates');
+Route::get('history',[dashboard::class,'history'])->name('history');
+
+Route::get('portfolio',[dashboard::class,'portfolio'])->name('portfolio');
+Route::get('DoneRecive',[dashboard::class,'DoneRecive'])->name('DoneRecive');
+Route::post('AddTransaction',[CoreController::class,'AddTransaction']);

@@ -53,10 +53,11 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255','unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'phone' => ['required','min:10','max:10'],
+            'upiid' => ['required'],
         ]);
     }
 
@@ -69,19 +70,20 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
-        Schema::connection('mysql')->create(str_replace(" ","",$data['name']."Table"), function($table)
-        {
-            $table->increments('id');
-            $table->foreignId('transactions_id')->constrained()->onDelete('cascade');
-            $table->string("participants");
-            $table->timestamps();
-        });
+        // Schema::connection('mysql')->create(str_replace(" ","",$data['name']."Table"), function($table)
+        // {
+        //     $table->increments('id');
+        //     $table->foreignId('transactions_id')->constrained()->onDelete('cascade');
+        //     $table->string("participants");
+        //     $table->timestamps();
+        // });
 
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'phone' =>$data["phone"],
+            'upiid'=>$data["upiid"],
         ]);
     }
 }
