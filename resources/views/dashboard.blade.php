@@ -22,8 +22,12 @@
             <div class="pb-4">
                 <div class="p-2 mt-2 ml-4">
                     <p class="text-xl font-bold text-gray-700">
+<<<<<<< HEAD
                         {{-- <i class="fas fa-arrow-left"></i> --}}
                         <button class="mobile-menu-button"><i class="fas fa-align-left"></i></button>
+=======
+                        <i class="fas fa-align-left"></i>
+>>>>>>> 3c251c5e9989371c5a2a89a95c04d87e87c2e65b
                          Transaction Summary</p>
                 </div>
                 <form action="AddTransaction" method="POST">
@@ -72,11 +76,17 @@
                 </div>
 
                 <div class="" style="height: 100px">
-                    <div class="flex justify-start">
-                        <button class="rounded-full p-1 ml-10 mt-2 bg-white text-xs px-2 text-gray-700 font-bold border-2 border-gray-700">+ADD</button>
-                        <button class="rounded-full p-1 ml-5 mt-2 bg-white text-xs px-2 text-gray-700 font-bold border-2 border-gray-700">-REMOVE</button>
+                    <div class="">
+                        <div class="bg-white rounded-2xl border border-blue-600 p-2 text-xl  w-full flex jutify-start mt-2 overflow-x-auto">
+                            <div class="rounded-full bg-green-300 p-2 mx-2 my-2 flex justify-between">
+                                <div class="pl-2 text-sm text-gray-700 font-bold mr-4">Name</div>
+                                <button class="bg-red-400 rounded-full px-2 py-1 text-sm font-bold">X</button>
+                            </div>
+                        </div>
+                        {{-- <button class="rounded-full p-1 ml-10 mt-2 bg-white text-xs px-2 text-gray-700 font-bold border-2 border-gray-700">+ADD</button>
+                        <button class="rounded-full p-1 ml-5 mt-2 bg-white text-xs px-2 text-gray-700 font-bold border-2 border-gray-700">-REMOVE</button> --}}
                     </div>
-                    <div class="flex justify-center items-center mt-2">
+                    <div class="flex justify-center items-center mt-1">
                         <button class="font-bold text-white text-xl p-2 border border-blue-600 rounded-full px-16 bg-gradient-to-r from-blue-700 to-blue-400 ...">
                             Submit
                         </button>

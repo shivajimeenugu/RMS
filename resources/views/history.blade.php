@@ -37,7 +37,6 @@
             </div>
             <div class="mx-2 mt-2">
 
-
                 <div class="px-3 overflow-y-auto" style="height: 475px">
                     <div class="bg-white mx-1 py-2 shadow-md items-center px-6 my-4 flex justify-between rounded-2xl border border-white">
                         <div class="font-bold text-gray-700">Room Mate-1</div>
@@ -119,7 +118,6 @@
                         <div class="text-gray-700 font-bold">Rs.70.0</div>
                         <div class="px-2  bg-yellow-400 py-1 rounded-xl text-white font-bold" style="background-color: #ff9d4e">Edit</div>
                     </div>
-
                 </div>
 
             </div>
