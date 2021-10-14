@@ -53,7 +53,8 @@ class CoreController extends Controller
 
         foreach($members as $mem )
         {
-            if($mem==strval($user_id))
+            //dd(strval($mem)==$user_id);
+            if(strval($mem)==$user_id)
             {
                 $lib=lib::create([
                     'ltid'=>$tid,
