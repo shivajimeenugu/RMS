@@ -118,9 +118,9 @@
        id=btn.value;
        var res=httpGet('/test?id='+id);
        //alert(res);
-       const myArr = JSON.parse(res);
-       alert(myArr["msg"]);
-       location.reload();
+       //const myArr = JSON.parse(res);
+       //alert(myArr["msg"]);
+       //location.reload();
     }
 </script>
 
