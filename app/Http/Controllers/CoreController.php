@@ -53,12 +53,23 @@ class CoreController extends Controller
 
         foreach($members as $mem )
         {
+            if($mem==$user_id)
+            {
+                $lib=lib::create([
+                    'ltid'=>$tid,
+                    'luid'=>$mem,
+                    'lamt'=>$perHead,
+                    'lsts'=>0,
+                ]);
+            }
+            else{
             $lib=lib::create([
                 'ltid'=>$tid,
                 'luid'=>$mem,
                 'lamt'=>$perHead,
 
             ]);
+        }
 
         }
 
