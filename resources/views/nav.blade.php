@@ -25,6 +25,10 @@
                 <a  href="{{route('add_roommates')}}"  class="ml-7">Roommates</a>
             </div>
             <div class="p-2 px-2 mt-4 ml-5 text-xl font-bold  flex justify-start">
+                <i class="far fa-address-card"></i>
+                <a  href="{{route('rockstars')}}"  class="ml-7">About App</a>
+            </div>
+            <div class="p-2 px-2 mt-4 ml-5 text-xl font-bold  flex justify-start">
                 <i class="far fa-door-open"></i>
                 <a  href="{{ route('logout') }}"
                 onclick="event.preventDefault();

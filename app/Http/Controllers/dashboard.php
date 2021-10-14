@@ -120,6 +120,10 @@ class dashboard extends Controller
         return view("history");
     }
 
+    public function rockstars(){
+        return view("rockstars");
+    }
+
     public function test(Request $req){
         $id=Crypt::decrypt($req->id);
         if(User::find($id))
