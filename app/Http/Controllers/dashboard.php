@@ -146,6 +146,18 @@ class dashboard extends Controller
 
             $lib->save();
         }
+
+        $Ts=DB::select(DB::raw('SELECT lid from trans,libs WHERE trans.tid=libs.ltid and trans.towner='.$euid.' and libs.luid='.$cuser.' and libs.lsts=1;'));
+        //dd($Ts[0]->lid);
+        foreach($Ts as $t)
+        {
+            $lib = lib::find($t->lid);
+
+            $lib->lsts = 0;
+
+            $lib->save();
+        }
+
         return redirect('balancesheet');
         //return response(["cuser"=>$req->user()->id,'uid'=>Crypt::decrypt($req->id)]);
     }
