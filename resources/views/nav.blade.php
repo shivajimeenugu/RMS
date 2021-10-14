@@ -14,7 +14,7 @@
             </div>
             <div class="p-2 px-2 mt-4 ml-5 text-xl font-bold  flex justify-start">
                 <i class="far fa-business-time"></i>
-                <a  href="{{route('history')}}" class="ml-6">Transaction History</a>
+                <a  href="#" class="ml-6">Transaction History</a>
             </div>
             <div class="p-2 px-2 mt-4 ml-5 text-xl font-bold  flex justify-start">
                 <i class="far fa-file-alt"></i>
@@ -26,7 +26,7 @@
             </div>
             <div class="p-2 px-2 mt-4 ml-5 text-xl font-bold  flex justify-start">
                 <i class="far fa-address-card"></i>
-                <a  href="{{route('rockstars')}}"  class="ml-7">About App</a>
+                <a  href="#"  class="ml-7">About App</a>
             </div>
             <div class="p-2 px-2 mt-4 ml-5 text-xl font-bold  flex justify-start">
                 <i class="far fa-door-open"></i>
