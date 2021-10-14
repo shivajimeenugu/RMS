@@ -48,9 +48,12 @@
                         <button type="button" class="font-bold disabled:opacity-90  text-white bg-red-400 border border-red-700 px-2 py-1 rounded-full" disabled>Remove</button>
                     </div>
                     @else
+                    @php
+                        $euid= Crypt::encrypt($user->id);
+                    @endphp
                     <div class="bg-white   mb-4 mt-2 shadow-lg  border-b py-4 rounded-2xl  items-center  flex justify-between px-4 ">
                         <div class="font-bold text-gray-700 text-2xl ">{{$user->name}}</div>
-                        <button type="button" class="font-bold modal-open text-white bg-red-400 border border-red-700 px-2 py-1 rounded-full">Remove</button>
+                        <button onclick="set_rmuser_id('{{$euid}}')" type="button" class="font-bold modal-open text-white bg-red-400 border border-red-700 px-2 py-1 rounded-full">Remove</button>
                     </div>
                     @endif
 
@@ -84,11 +87,11 @@
             </div>
             <div class="mx-5 p-2 w-full">
                 <div class="flex justify-center ">
-                        <div class="p-2 bg-white mr-5 w-full rounded-xl border border-gray-200 text-center text-xl font-bold">Room Mate Name </div>
+                        <div class="p-2 bg-white mr-5 w-full rounded-xl border border-gray-200 text-center text-xl font-bold">Are You Sure? </div>
                 </div>
                 <div class="flex justify-between mx-5 mt-4">
-                    <button class="bg-white px-3 py-2 border-2 rounded-md text-gray-700 font-bold  border-gray-500 text-xl">Cancel</button>
-                    <button class="bg-red-500 mr-5 px-3 py-2 border-2 rounded-md text-white font-bold  border-red-800 text-xl">Remove</button>
+                    <button  class="modal-close bg-white px-3 py-2 border-2 rounded-md text-gray-700 font-bold  border-gray-500 text-xl">Cancel</button>
+                    <button value="hh" onclick="rmuser()" id="modelbtn" class="bg-red-500 mr-5 px-3 py-2 border-2 rounded-md text-white font-bold  border-red-800 text-xl">Yes Remove</button>
                 </div>
             </div>
         </div>
@@ -96,7 +99,30 @@
 </div>
 
 
-
+<script>
+    function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+}
+    function set_rmuser_id(id)
+    {
+       var btn=document.getElementById("modelbtn");
+       btn.value=id;
+    }
+    function rmuser()
+    {
+       var btn=document.getElementById("modelbtn");
+       id=btn.value;
+       var res=httpGet('/test?id='+id);
+       //alert(res);
+       const myArr = JSON.parse(res);
+       alert(myArr["msg"]);
+       location.reload();
+    }
+</script>
 
 
 <script>
@@ -104,6 +130,7 @@
     for (var i = 0; i < openmodal.length; i++) {
     openmodal[i].addEventListener('click', function(event){
         event.preventDefault()
+
         toggleModal()
     })
     }

@@ -120,8 +120,15 @@ class dashboard extends Controller
         return view("history");
     }
 
-    public function test(){
-        return response("True",200);
+    public function test(Request $req){
+        $id=Crypt::decrypt($req->id);
+        if(User::find($id))
+        {
+            $user = User::find($id);
+            $userName=$user->name;
+            $user->delete();
+        }
+        return response(["msg"=>$userName." Removed Sucessfully","id"=>$id],200);
     }
 
     //DoneRecive
