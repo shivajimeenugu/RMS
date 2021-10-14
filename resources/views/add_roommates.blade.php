@@ -90,8 +90,15 @@
                         <div class="p-2 bg-white mr-5 w-full rounded-xl border border-gray-200 text-center text-xl font-bold">Are You Sure? </div>
                 </div>
                 <div class="flex justify-between mx-5 mt-4">
+
                     <button  class="modal-close bg-white px-3 py-2 border-2 rounded-md text-gray-700 font-bold  border-gray-500 text-xl">Cancel</button>
-                    <button value="hh" onclick="rmuser()" id="modelbtn" class="bg-red-500 mr-5 px-3 py-2 border-2 rounded-md text-white font-bold  border-red-800 text-xl">Yes Remove</button>
+
+                    <form id="rmform" action="{{route('test')}}" method="POST">
+                    @csrf
+                    <input id="rmform_value" name="id" value="N" type="hidden">
+
+                    </form>
+                    <button  onclick="rmuser()" id="modelbtn" class="bg-red-500 mr-5 px-3 py-2 border-2 rounded-md text-white font-bold  border-red-800 text-xl">Yes Remove</button>
                 </div>
             </div>
         </div>
@@ -109,18 +116,13 @@
 }
     function set_rmuser_id(id)
     {
-       var btn=document.getElementById("modelbtn");
+       var btn=document.getElementById("rmform_value");
        btn.value=id;
     }
     function rmuser()
     {
-       var btn=document.getElementById("modelbtn");
-       id=btn.value;
-       var res=httpGet('/test?id='+id);
-       //alert(res);
-       //const myArr = JSON.parse(res);
-       //alert(myArr["msg"]);
-       //location.reload();
+       var f=document.getElementById("rmform");
+       f.submit();
     }
 </script>
 

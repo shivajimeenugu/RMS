@@ -128,7 +128,8 @@ class dashboard extends Controller
             $userName=$user->name;
             $user->delete();
         }
-        return response(["msg"=>$userName." Removed Sucessfully","id"=>$id],200);
+        //return response(["msg"=>$userName." Removed Sucessfully","id"=>$id],200);
+        return redirect('add_roommates');
     }
 
     //DoneRecive
