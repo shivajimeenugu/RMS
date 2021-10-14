@@ -33,10 +33,7 @@
                         Remove Roommates
                     </div>
                 </div>
-                {{-- <div class="mx-10 mt-2  flex justify-center">
-                        <a href="#" type="button" class="border-2 mr-4 shadow-lg modal-open border-blue-500 text-white font-bold text-2xl rounded-md px-4 py-1 bg-blue-600">Add</a>
-                        <a href="#" type="button" class="modal-open border-2 ml-2 shadow-lg border-blue-500 text-white font-bold text-2xl rounded-md px-4 py-1 bg-blue-600">Remove</a>
-                </div> --}}
+
             </div>
             <div class="mx-5 rounded-md mt-2">
                 <div class="px-4 pb-3 overflow-y-auto" style="height: 500px">
