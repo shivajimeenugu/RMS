@@ -7,9 +7,21 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use League\CommonMark\Extension\CommonMark\Node\Block\ListData;
-
+use Illuminate\Support\Facades\Mail;
 class CoreController extends Controller
 {
+
+    public function testmail(Request $req)
+    {
+        $to_name="Sivaji";
+        $to_email="shivajimeenugu@gmail.com";
+        $data=array("name"=>"Sivaji");
+
+        Mail::send('testmail',$data,function($message) use ($to_name,$to_email){
+            $message->to($to_email)
+            ->subject('Laravel mail');
+        });
+    }
 
     public function AddTransaction(Request $req)
     {

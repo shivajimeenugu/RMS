@@ -61,7 +61,7 @@
                     </div>
                 </form>
                 <div class="flex justify-between mx-10 text-white text-lg  font-bold">
-                    <a href="#">Forgot password?</a>
+                    <a href="{{route('password.update')}}">Forgot password?</a>
                     <a href="{{route('register')}}">Register Now</a>
                 </div>
             </div>

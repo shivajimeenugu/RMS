@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [dashboard::class, 'portfolio'])->name('home');
 Route::post('/test', [dashboard::class, 'test'])->name('test');
+
+Route::get('/testmail', [CoreController::class,'testmail'])->name('testmail');
 Auth::routes();
 Route::get('/rockstars', [dashboard::class, 'rockstars'])->name('rockstars');
 Route::get('/home', [dashboard::class, 'portfolio'])->name('home2');
