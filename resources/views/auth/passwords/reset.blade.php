@@ -40,7 +40,7 @@
                         <div class="flex justify-start items-center  w-10/12 py-2 px-4 border-2 border-white rounded-md @error('email') is-invalid border-3 border-red-700 @enderror">
                             <i class="far fa-envelope text-2xl mr-4"></i>
                             <div class="text-xl">
-                                <input type="email" name="email" class="bg-blue-700 ml-5 focus:outline-none border-0 placeholder-white text-center w-40" placeholder="Email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
+                                <input type="email" name="email" class="bg-blue-700 ml-5 focus:outline-none border-0 placeholder-white text-center w-40" placeholder="Email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus readonly>
                             </div>
                         </div>
                     </div>
