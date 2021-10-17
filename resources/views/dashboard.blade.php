@@ -89,6 +89,12 @@
 
     </div>
 
+    @if (session('status'))
+    <script>
+        swal('{{ session('status') }}', '', 'success');
+    </script>
+    @endif
+
     <script>
 
 

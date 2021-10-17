@@ -49,19 +49,6 @@ class CoreController extends Controller
         $tran->save();
 
         $tid=$tran::all()->last()->tid;
-        //dd($t);
-
-
-
-        // $lib=new lib;
-        // foreach($members as $mem )
-        // {
-        //     $lib->ltid=$tid;
-        //     $lib->luid=$mem;
-        //     $lib->lamt=$perHead;
-        //     $lib->save();
-
-        // }
 
         foreach($members as $mem )
         {
@@ -108,7 +95,7 @@ class CoreController extends Controller
 
         // $data=DB::select(DB::raw('insert into '.$OwnerTableName.' (transactions_id,participants) values('.$TransactionDetails->id.',"'.$partys.'")'));
 
-       return redirect('dashboard');
+       return redirect('dashboard')->with('status', 'Transaction Added');
     }
 
     public function GetMe(Request $req)

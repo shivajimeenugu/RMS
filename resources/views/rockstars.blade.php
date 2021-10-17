@@ -39,19 +39,20 @@
 
                 <div class="flex justify-center mb-5">
 
-                    <h1 class="text-white font-bold text-2xl">Akula Prudhvi Srinivas</h1>
+                    <h1 onclick="swal('Designer!', 'Akula Prudhvi Srinivas', 'success')" class="text-white font-bold text-2xl">Akula Prudhvi Srinivas</h1>
                          </div>
                 <div class="flex justify-center mb-5">
 
-                       <h1 class="text-white font-bold text-2xl">Mohammad Firoz Khan</h1>
+                       <h1 onclick="swal('Frontend Dev!', 'Mohammad Firoz Kha', 'success')" class="text-white font-bold text-2xl">Mohammad Firoz Khan</h1>
                          </div>
                 <div class="flex justify-center mb-5">
 
-                         <h1 class="text-white font-bold text-2xl">Meenugu Sivaji</h1>
+                         <h1 onclick="swal('Backend Dev!', 'Meenugu Sivaji', 'success')" class="text-white font-bold text-2xl">Meenugu Sivaji</h1>
                           </div>
                 <div class="flex justify-center mb-5">
 
-                           <h1 class="text-white font-bold text-2xl">Panchala Karthik</h1>
+
+                           <h1 onclick="swal('Designer!', 'Panchala Karthik', 'success')" class="text-white font-bold text-2xl">Panchala Karthik</h1>
                 </div>
 
 
