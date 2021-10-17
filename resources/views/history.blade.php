@@ -53,7 +53,7 @@
                         </div>
                     </div>
                     <div class="px-1 overflow-y-auto" style="height: 400px;">
-                        <div class="bg-white mx-4 border-b py-4 items-center font-bold  flex justify-between ">
+
 
                             @foreach ($PData as $p )
                             @if (array_key_exists($p->ltremarks,$users))
@@ -71,7 +71,7 @@
                             @endif
 
                             @endforeach
-                        </div>
+
                     </div>
                 </div>
 
