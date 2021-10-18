@@ -144,6 +144,7 @@ class dashboard extends Controller
             if($b->bal==strval(0) || $b->bal==0 )
             {
                 $this->ManualDoneRecive($id,$b->id);
+                dd($BalSheet,$b,$id,$b->id);
             }
         }
 
