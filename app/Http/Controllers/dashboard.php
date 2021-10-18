@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\User;
 use App\Models\lib;
 use App\Models\ltran;
@@ -55,7 +56,13 @@ class dashboard extends Controller
             $BalSheet[$d['id']]=['id'=>$d['id'],'bal'=>$d['myasset']-$d['mylib']];
         }
 
-        //dd($BalSheet);
+        foreach($BalSheet as $b)
+        {
+            if($b->bal==strval(0) || $b->bal==0 )
+            {
+                $this->ManualDoneRecive($id,$b->id);
+            }
+        }
 
 
 
@@ -93,7 +100,7 @@ class dashboard extends Controller
             }
         }
         //dd($AssetsData,$LibsData,$data);
-
+        //dd($data);
         return view('liabalities',['users'=>$users,'data'=>$data]);
     }
 
@@ -109,7 +116,7 @@ class dashboard extends Controller
 
         foreach($AssetsData as $a)
         {
-            $data[$a->luid]=['id'=>$a->luid,'myasset'=>$a->myasset,'mylib'=>"0"];
+            $data[$a->luid]=['id'=>$a->luid,'myasset'=>$a->myasset,'mylib'=>0];
         }
 
         foreach($LibsData as $l)
@@ -120,47 +127,41 @@ class dashboard extends Controller
             }
             else{
                 $data[$l->towner]['id']=$l->towner;
-                $data[$l->towner]['myasset']="0";
+                $data[$l->towner]['myasset']=0;
                 $data[$l->towner]['mylib']=$l->mylib;
 
             }
         }
-        $FinalAssetData=0;
-        $FinalLibData=0;
-
-        foreach($users as $user)
+        //dd($data[2]->id);
+        $BalSheet=[];
+        foreach($data as $d)
         {
-            if(array_key_exists($user->id,$data))
-            {
-                $CurrentAsset=$data[$user->id]['myasset'];
-            }
-            else
-            {
-                $CurrentAsset="0";
-            }
-
-            if(array_key_exists($user->id,$data))
-            {
-                 $CurrentLibs=$data[$user->id]['mylib'];
-            }
-            else
-            {
-                $CurrentLibs="0";
-            }
-
-            if($CurrentAsset==$CurrentLibs)
-            {
-
-            }
-            else{
-                $FinalAssetData=$FinalAssetData+$CurrentAsset;
-                $FinalLibData=$FinalLibData+$CurrentLibs;
-            }
-
-
+            $BalSheet[$d['id']]=['id'=>$d['id'],'bal'=>$d['myasset']-$d['mylib']];
         }
 
-        return view("portfolio",["AssetSum"=>round($FinalAssetData),"LibsSum"=>round($FinalLibData)]);
+        foreach($BalSheet as $b)
+        {
+            if($b->bal==strval(0) || $b->bal==0 )
+            {
+                $this->ManualDoneRecive($id,$b->id);
+            }
+        }
+
+
+
+
+        //Port
+        //$owner=$req->user();
+        //$name=$owner->name;
+        //$id=$owner->id;
+        $LibsSum=DB::select(DB::raw('SELECT ifnull(sum(lamt),0) as amt FROM trans,libs WHERE tid=ltid and luid='.$id.' and towner!='.$id.' and lsts=1;'));
+        $AssetSum=DB::select(DB::raw('SELECT ifnull(sum(lamt),0) as amt FROM trans,libs WHERE tid=ltid and towner='.$id.' and luid!='.$id.' and lsts=1;'));
+
+        $a=$AssetSum[0]->amt;
+        $l=$LibsSum[0]->amt;
+
+
+        return view("portfolio",["AssetSum"=>round($a),"LibsSum"=>round($l)]);
     }
 
     public function add_roommates(Request $req){
@@ -296,4 +297,42 @@ class dashboard extends Controller
         return redirect('balancesheet')->with('status', 'Transaction Recived');
         //return response(["cuser"=>$req->user()->id,'uid'=>Crypt::decrypt($req->id)]);
     }
+
+    public function ManualDoneRecive($cuser,$euid){
+
+        $Ts1=DB::select(DB::raw('SELECT lid from trans,libs WHERE trans.tid=libs.ltid and trans.towner='.$cuser.' and libs.luid='.$euid.' and libs.lsts=1;'));
+        //dd($Ts[0]->lid);
+        $MyLib=0;
+        $MyAsset=0;
+        $MyAssetIds=[];
+        $MyLibIds=[];
+        foreach($Ts1 as $t)
+        {
+            $lib1 = lib::find($t->lid);
+            array_push($MyAssetIds,$t->lid);
+            $lib1->lsts = 0;
+            $MyAsset=$MyAsset+$lib1->lamt;
+            $lib1->save();
+        }
+
+        $Ts=DB::select(DB::raw('SELECT lid from trans,libs WHERE trans.tid=libs.ltid and trans.towner='.$euid.' and libs.luid='.$cuser.' and libs.lsts=1;'));
+
+        foreach($Ts as $t)
+        {
+            $lib = lib::find($t->lid);
+            array_push($MyLibIds,$t->lid);
+            $lib->lsts = 0;
+
+            $MyLib=$MyLib+$lib->lamt;
+
+            $lib->save();
+        }
+
+        return true;
+       }
+
+
+
+
+
 }

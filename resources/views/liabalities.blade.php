@@ -87,7 +87,7 @@
                         @endphp
 
 
-                        @if ($CurrentAsset!=$CurrentLibs)
+                        @if (1)
                         <div class=" w-4/12 pl-10">
                             {{$CurrentAsset}}
                         </div>
