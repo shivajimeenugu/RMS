@@ -106,7 +106,16 @@ class dashboard extends Controller
 
         $a=$AssetSum[0]->amt;
         $l=$LibsSum[0]->amt;
-        return view("portfolio",["AssetSum"=>round($a),"LibsSum"=>round($l)]);
+        $a=round($a);
+        $l=round($l);
+
+        if($a=$l)
+        {
+            $a=0;
+            $l=0;
+        }
+
+        return view("portfolio",["AssetSum"=>$a,"LibsSum"=>$l]);
     }
 
     public function add_roommates(Request $req){

@@ -59,7 +59,7 @@
                     @foreach ($users as $user )
                     <div class="bg-white mx-4 border-b py-4 items-center font-bold  flex justify-between ">
                         <div class="font-bold text-gray-700 w-6/12">{{$user->name}}</div>
-                        <div class=" w-4/12 pl-10">
+
                             @php
                                 if(array_key_exists($user->id,$data))
                                 {
@@ -70,10 +70,11 @@
                                     $CurrentAsset="0";
                                 }
                             @endphp
-                            {{$CurrentAsset}}
 
-                        </div>
-                        <div class=" w-4/12 pl-10">
+
+
+
+
                             @php
                             if(array_key_exists($user->id,$data))
                             {
@@ -84,13 +85,28 @@
                                 $CurrentLibs="0";
                             }
                         @endphp
-                        {{$CurrentLibs}}
 
-                        @if ($CurrentLibs=$CurrentAsset)
+
+                        @if ($CurrentAsset!=$CurrentLibs)
+                        <div class=" w-4/12 pl-10">
+                            {{$CurrentAsset}}
+                        </div>
+
+                        <div class=" w-4/12 pl-10">
+                            {{$CurrentLibs}}
+                        </div>
+                        @else
+                        <div class=" w-4/12 pl-10">
+                            0
+                        </div>
+
+                        <div class=" w-4/12 pl-10">
+                            0
+                        </div>
 
                         @endif
 
-                        </div>
+
                     </div>
 
                     @endforeach
