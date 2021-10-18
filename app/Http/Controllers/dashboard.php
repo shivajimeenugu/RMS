@@ -142,7 +142,7 @@ class dashboard extends Controller
         {
             $BalSheet[$d['id']]=['id'=>$d['id'],'bal'=>$d['myasset']-$d['mylib']];
         }
-        dd($BalSheet);
+        //dd($BalSheet);
         foreach($BalSheet as $b)
         {
             //dd($b);
