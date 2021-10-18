@@ -58,9 +58,13 @@ class dashboard extends Controller
 
         foreach($BalSheet as $b)
         {
-            if($b->bal==strval(0) || $b->bal==0 )
+            //dd($b);
+            if($b['id']!=null)
             {
-                $this->ManualDoneRecive($id,$b->id);
+            if($b['bal']==strval(0) || $b['bal']==0 )
+            {
+                $this->ManualDoneRecive($id,$b['id']);
+            }
             }
         }
 
@@ -138,13 +142,16 @@ class dashboard extends Controller
         {
             $BalSheet[$d['id']]=['id'=>$d['id'],'bal'=>$d['myasset']-$d['mylib']];
         }
-
+        dd($BalSheet);
         foreach($BalSheet as $b)
         {
-            if($b->bal==strval(0) || $b->bal==0 )
+            //dd($b);
+            if($b['id']!=null)
             {
-                $this->ManualDoneRecive($id,$b->id);
-                dd($BalSheet,$b,$id,$b->id);
+            if($b['bal']==strval(0) || $b['bal']==0 )
+            {
+                $this->ManualDoneRecive($id,$b['id']);
+            }
             }
         }
 
