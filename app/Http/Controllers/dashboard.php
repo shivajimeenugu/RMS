@@ -109,7 +109,7 @@ class dashboard extends Controller
         $a=round($a);
         $l=round($l);
 
-        if($a=$l)
+        if($a==$l)
         {
             $a=0;
             $l=0;
