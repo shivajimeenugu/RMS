@@ -85,6 +85,11 @@
                             }
                         @endphp
                         {{$CurrentLibs}}
+
+                        @if ($CurrentLibs=$CurrentAsset)
+
+                        @endif
+
                         </div>
                     </div>
 
