@@ -125,8 +125,8 @@ class dashboard extends Controller
 
             }
         }
-        $FinalAssetData=[];
-        $FinalLibData=[];
+        $FinalAssetData=0;
+        $FinalLibData=0;
 
         foreach($users as $user)
         {
