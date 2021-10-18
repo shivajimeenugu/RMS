@@ -43,7 +43,7 @@
                          </div>
                 <div class="flex justify-center mb-5">
 
-                       <h1 onclick="swal('Frontend Dev!', 'Mohammad Firoz Kha', 'success')" class="text-white font-bold text-2xl">Mohammad Firoz Khan</h1>
+                       <h1 onclick="swal('Frontend Dev!', 'Mohammad Firoz Khan', 'success')" class="text-white font-bold text-2xl">Mohammad Firoz Khan</h1>
                          </div>
                 <div class="flex justify-center mb-5">
 

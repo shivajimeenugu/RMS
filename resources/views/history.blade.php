@@ -58,7 +58,7 @@
                             @foreach ($PData as $p )
                             @if (array_key_exists($p->ltremarks,$users))
                             <div class="bg-white mx-4 border-b py-4 items-center font-bold  flex justify-between ">
-                                <div class="font-bold text-gray-700 w-6/12">{{$users[$p->ltremarks]}}</div>
+                                <div class="font-bold text-gray-700 w-6/12">{{$users[$p->ltowner]}}</div>
                                 <div class=" w-4/12 pl-10">{{$p->ltamt}}</div>
                                 <div class=" w-4/12 pl-10">{{$p->ltdate}}</div>
                                 </div>
