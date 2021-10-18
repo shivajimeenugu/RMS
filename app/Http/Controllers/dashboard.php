@@ -93,7 +93,7 @@ class dashboard extends Controller
             }
         }
         //dd($AssetsData,$LibsData,$data);
-
+        dd($data);
         return view('liabalities',['users'=>$users,'data'=>$data]);
     }
 
