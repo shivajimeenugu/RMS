@@ -98,24 +98,69 @@ class dashboard extends Controller
     }
 
     public function portfolio(Request $req){
+        $users=User::all();
         $owner=$req->user();
         $name=$owner->name;
         $id=$owner->id;
-        $LibsSum=DB::select(DB::raw('SELECT ifnull(sum(lamt),0) as amt FROM trans,libs WHERE tid=ltid and luid='.$id.' and towner!='.$id.' and lsts=1;'));
-        $AssetSum=DB::select(DB::raw('SELECT ifnull(sum(lamt),0) as amt FROM trans,libs WHERE tid=ltid and towner='.$id.' and luid!='.$id.' and lsts=1;'));
+        $data=[];
+        $AssetsData=DB::select(DB::raw('SELECT libs.luid,ifnull(sum(libs.lamt),0) AS myasset  FROM trans LEFT JOIN libs ON trans.tid=libs.ltid and trans.towner='.$id.' and libs.lsts=1 GROUP BY libs.luid;'));
 
-        $a=$AssetSum[0]->amt;
-        $l=$LibsSum[0]->amt;
-        $a=round($a);
-        $l=round($l);
+        $LibsData=DB::select(DB::raw('SELECT trans.towner,ifnull(sum(libs.lamt),0) AS mylib FROM trans LEFT JOIN libs ON trans.tid=libs.ltid and libs.luid='.$id.' and libs.lsts=1 GROUP BY trans.towner;'));
 
-        if($a==$l)
+        foreach($AssetsData as $a)
         {
-            $a=0;
-            $l=0;
+            $data[$a->luid]=['id'=>$a->luid,'myasset'=>$a->myasset,'mylib'=>"0"];
         }
 
-        return view("portfolio",["AssetSum"=>$a,"LibsSum"=>$l]);
+        foreach($LibsData as $l)
+        {
+            if(array_key_exists($l->towner,$data))
+            {
+                $data[$l->towner]['mylib']=$l->mylib;
+            }
+            else{
+                $data[$l->towner]['id']=$l->towner;
+                $data[$l->towner]['myasset']="0";
+                $data[$l->towner]['mylib']=$l->mylib;
+
+            }
+        }
+        $FinalAssetData=[];
+        $FinalLibData=[];
+
+        foreach($users as $user)
+        {
+            if(array_key_exists($user->id,$data))
+            {
+                $CurrentAsset=$data[$user->id]['myasset'];
+            }
+            else
+            {
+                $CurrentAsset="0";
+            }
+
+            if(array_key_exists($user->id,$data))
+            {
+                 $CurrentLibs=$data[$user->id]['mylib'];
+            }
+            else
+            {
+                $CurrentLibs="0";
+            }
+
+            if($CurrentAsset==$CurrentLibs)
+            {
+
+            }
+            else{
+                $FinalAssetData=$FinalAssetData+$CurrentAsset;
+                $FinalLibData=$FinalLibData+$CurrentLibs;
+            }
+
+
+        }
+
+        return view("portfolio",["AssetSum"=>round($FinalAssetData),"LibsSum"=>round($FinalLibData)]);
     }
 
     public function add_roommates(Request $req){
