@@ -53,7 +53,7 @@ class dashboard extends Controller
 
 
 
-        //dd($LibData,$data);
+        dd($LibData,$data);
         //SELECT trans.tdate,trans.tremarks,trans.tamt,users.name FROM trans,users where trans.towner=users.id and trans.towner=1 ORDER BY trans.tdate DESC
 
         return view("transactions",['users'=>$users,'data'=>$data]);
