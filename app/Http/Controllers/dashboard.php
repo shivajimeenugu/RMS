@@ -36,7 +36,7 @@ class dashboard extends Controller
         }
        // dd($LibData['49']['uname']);
 
-        $TData=DB::select(DB::raw('SELECT trans.tid,trans.tdate,trans.tremarks,trans.tamt,users.name FROM trans,users where trans.towner=users.id ORDER BY trans.tdate DESC;'));
+        $TData=DB::select(DB::raw('SELECT trans.tid,trans.tdate,trans.tremarks,trans.tamt,users.name FROM trans,users where trans.towner=users.id and trans.tid IN (select distinct libs.ltid from libs)  ORDER BY trans.tdate DESC;'));
 
         foreach($TData as $t)
         {
