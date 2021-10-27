@@ -76,13 +76,14 @@
                     </div>
                     <div class="relative overflow-hidden transition-all max-h-0 duration-700" style="" x-ref="container1" x-bind:style="selected == 1 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">
                         <div class="p-6">
-                         @php
+                         {{$d['uname']}}
+                            {{-- @php
                              $unames=explode(',',$d['uname']);
                              foreach($unames as $n)
                              {
                                  echo '<p>'.$n.'</p>';
                              }
-                         @endphp
+                         @endphp --}}
                         </div>
                     </div>
 
