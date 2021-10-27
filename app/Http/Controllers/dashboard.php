@@ -20,6 +20,46 @@ class dashboard extends Controller
         return view("dashboard",['users'=>$users]);
     }
 
+    public function transactions(Request $req){
+        $users=User::all();
+        $owner=$req->user();
+        $name=$owner->name;
+        $id=$owner->id;
+        $data=[];
+        $LibData=[];
+
+        $TData_tid=DB::select(DB::raw('SELECT libs.ltid,GROUP_CONCAT(users.name) as uname FROM `libs`,users WHERE users.id=libs.luid GROUP BY libs.ltid;'));
+
+        foreach($TData_tid as $tl)
+        {
+            $LibData[$tl->ltid]=['ltid'=>$tl->ltid,'uname'=>$tl->uname];
+        }
+       // dd($LibData['49']['uname']);
+
+        $TData=DB::select(DB::raw('SELECT trans.tid,trans.tdate,trans.tremarks,trans.tamt,users.name FROM trans,users where trans.towner=users.id ORDER BY trans.tdate DESC;'));
+
+        foreach($TData as $t)
+        {
+            $data[$t->tid]=[
+                'tid'=>$t->tid,
+                'tdate'=>$t->tdate,
+                'tremarks'=>$t->tremarks,
+                'tamt'=>$t->tamt,
+                'towner'=>$t->name,
+                'uname'=>$LibData[$t->tid]['uname']
+            ];
+        }
+
+
+
+
+        //dd($LibData,$data);
+        //SELECT trans.tdate,trans.tremarks,trans.tamt,users.name FROM trans,users where trans.towner=users.id and trans.towner=1 ORDER BY trans.tdate DESC
+
+        return view("transactions",['users'=>$users,'data'=>$data]);
+    }
+
+
     public function balancesheet(Request $req){
 
         $users=User::all();

@@ -14,7 +14,11 @@
             </div>
             <div class="p-2 px-2 mt-4 ml-5 text-xl font-bold  flex justify-start">
                 <i class="far fa-business-time"></i>
-                <a  href="{{route('history')}}" class="ml-6">Transaction History</a>
+                <a  href="{{route('history')}}" class="ml-6">Bill History</a>
+            </div>
+            <div class="p-2 px-2 mt-4 ml-5 text-xl font-bold  flex justify-start">
+                <i class="far fa-business-time"></i>
+                <a  href="{{route('transactions')}}" class="ml-6">Transaction History</a>
             </div>
             <div class="p-2 px-2 mt-4 ml-5 text-xl font-bold  flex justify-start">
                 <i class="far fa-file-alt"></i>
