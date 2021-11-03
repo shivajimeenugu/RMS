@@ -81,7 +81,7 @@
                                 //<button class="px-2 bg-yellow-400 py-1 text-sm mr-2 rounded-xl text-white font-bold" style="background-color: #0A65FF">Pay</button>
                                 //<a href="upi://pay?pa=UPIID@oksbi&amp;pn=JOHN BRITAS AK &amp;cu=INR" class="px-2 bg-yellow-400 py-1 text-sm mr-2 rounded-xl text-white font-bold" style="background-color: #0A65FF">Pay Now !</a>
                                 //upi://pay?pa=BHARATPE.9042651644@icici&pn=BharatPe%20Merchant&cu=INR&tn=Verified%20Merchant
-                                $CurrentAction='<a href="upi://pay?pa='.$user->upiid.'&pn='.str_replace(" ","",$user->name).'&am='.(-1*$CurrentAsset).'&cu=INR&tn=RoomBill " class="px-2 bg-yellow-400 py-1 text-sm mr-2 rounded-xl text-white font-bold" style="background-color: #0A65FF">Pay Now !</a>';
+                                $CurrentAction='<a href="upi://pay?pa='.$user->upiid.'&pn='.str_replace(" ","",$user->name).'&cu=INR&tn=RoomBill " class="px-2 bg-yellow-400 py-1 text-sm mr-2 rounded-xl text-white font-bold" style="background-color: #0A65FF">Pay Now !</a>';
                             }
                             else if($CurrentAsset!="-" && $CurrentAsset!=0 && $CurrentAsset!='0' )
                             {
