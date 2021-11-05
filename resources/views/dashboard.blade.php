@@ -26,10 +26,10 @@
                         <button class="mobile-menu-button"><i class="fas fa-align-left"></i></button>
                          Transaction Summary</p>
                 </div>
-                <form action="AddTransaction" method="POST">
+                <form action="AddTransaction" id="tform" method="POST">
                     @csrf
                 <div class="mx-10 mt-5">
-                    <input type="Int" name="amount" id="" placeholder="Amount" class="px-4 py-4  text-lg placeholder-gray-600 font-bold rounded-lg border text-bold border-blue-400 text-gray-600 w-full" required>
+                    <input  type="Int" name="amount" id="amount" placeholder="Amount" class="px-4 py-4  text-lg placeholder-gray-600 font-bold rounded-lg border text-bold border-blue-400 text-gray-600 w-full" required>
                 </div>
                 <div class="mt-4 mx-8 flex justify-center">
                     <input type="text" name="remarks" id="title" placeholder="Item Details" class="px-2 py-2 border border-blue-400 placeholder-gray-600 font-bold pl-5  rounded w-8/12" required>
@@ -72,12 +72,14 @@
                 </div>
 
                 <div class="" style="height: 100px">
-                    <div class="flex justify-start">
+                    {{-- <div class="flex justify-start">
                         <button class="rounded-full p-1 ml-10 mt-2 bg-white text-xs px-2 text-gray-700 font-bold border-2 border-gray-700">+ADD</button>
                         <button class="rounded-full p-1 ml-5 mt-2 bg-white text-xs px-2 text-gray-700 font-bold border-2 border-gray-700">-REMOVE</button>
-                    </div>
+                    </div> --}}
                     <div class="flex justify-center items-center mt-2">
-                        <button class="font-bold text-white text-xl p-2 border border-blue-600 rounded-full px-16 bg-gradient-to-r from-blue-700 to-blue-400 ...">
+
+
+                        <button id="subbtn" onclick="processme()" class="font-bold text-white text-xl p-2 border border-blue-600 rounded-full px-16 bg-gradient-to-r from-blue-700 to-blue-400 ...">
                             Submit
                         </button>
                     </div>
@@ -108,6 +110,36 @@
 
 
 
+
+
+        function processme()
+        {
+            //alert("hi");
+            var btn=document.getElementById('subbtn');
+            var h=`<span><div class="bg-white flex space-x-2 p-5 rounded-full justify-center items-center">
+                                <div class="bg-blue-600 p-2  w-4 h-4 rounded-full animate-bounce blue-circle"></div>
+                                <div class="bg-green-600 p-2 w-4 h-4 rounded-full animate-bounce green-circle"></div>
+                                <div class="bg-red-600 p-2  w-4 h-4 rounded-full animate-bounce red-circle"></div>
+                                </div></span>`;
+
+
+            var amt=document.getElementById('amount').value;
+            var rem=document.getElementById('title').value;
+            if(amt !="" && rem !="")
+            {
+                btn.innerHTML=h;
+                btn.disabled=true;
+                btn.className ="";
+                var f=document.getElementById('tform');
+                f.submit();
+            }
+            else{
+                swal('Please Fill All Required Fields', '', 'error');
+            }
+
+
+
+        }
 
     </script>
 
