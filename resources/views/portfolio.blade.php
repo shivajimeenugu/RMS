@@ -59,8 +59,8 @@
                         Updates
                 </div>
 
-                <div class="p-4 text-xl text-red-900 font-bold animate-pulse ">
-                    <p class="p-4 bg-blue-600 mt-2 rounded-lg px-2 py-1   text-white"><a href="{{route('rules')}}" >*Rules</a></p>
+                <div class="p-4 text-xl text-red-900 font-bold  ">
+                    <p class="p-4 bg-blue-600 mt-2 rounded-lg px-2 py-1   text-white">*Rules</p>
 
                     <p class="p-4 bg-blue-600 mt-2 rounded-lg px-2 py-1  text-white" ><a href="{{route('transactions')}}" >Now You Can Delete your transactions.. </a></p>
                 </div>
