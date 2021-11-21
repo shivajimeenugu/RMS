@@ -61,6 +61,7 @@
 
                 <div class="p-4 text-xl text-red-900 font-bold animate-pulse ">
                     <a href="{{route('rules')}}" >*Rules</a>
+                    <a href="{{route('transactions')}}" >Now You Can Delete your transactions.. </a>
                 </div>
                 {{-- <div class="p-4 text-xl text-gray-900 font-bold ">
                     <p>Your</p>
