@@ -60,20 +60,11 @@
                 </div>
 
                 <div class="p-4 text-xl text-red-900 font-bold animate-pulse ">
-                    <p class="bg-blue-600 mt-2 rounded-lg px-2 py-1   text-white"><a href="{{route('rules')}}" >*Rules</a></p>
+                    <p class="p-4 bg-blue-600 mt-2 rounded-lg px-2 py-1   text-white"><a href="{{route('rules')}}" >*Rules</a></p>
 
-                    <p class="bg-blue-600 mt-2 rounded-lg px-2 py-1  text-white" ><a href="{{route('transactions')}}" >Now You Can Delete your transactions.. </a></p>
+                    <p class="p-4 bg-blue-600 mt-2 rounded-lg px-2 py-1  text-white" ><a href="{{route('transactions')}}" >Now You Can Delete your transactions.. </a></p>
                 </div>
-                {{-- <div class="p-4 text-xl text-gray-900 font-bold ">
-                    <p>Your</p>
-                    <p>Total Assets</p>
-                    <p class="bg-blue-600 mt-2 rounded-lg px-2 py-1 text-2xl w-6/12 text-white">{{  $AssetSum}}</p>
-                </div>
-                <div class="p-4 text-xl text-gray-900 font-bold ">
-                    <p>Your</p>
-                    <p>Total Liabalities</p>
-                    <p class="bg-blue-600 mt-2 mb-4 rounded-lg px-2 py-1 text-2xl w-6/12 text-white">{{$LibsSum}}</p>
-                </div> --}}
+
 
 
             </div>
