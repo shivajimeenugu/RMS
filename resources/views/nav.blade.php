@@ -9,6 +9,10 @@
                 <a href="{{route('portfolio')}}" class="ml-6">Home</a>
             </div>
             <div class="p-2 px-2 mt-4 ml-5 text-xl font-bold  flex justify-start">
+                <i class="far fa-book"></i>
+                <a href="{{route('rules')}}" class="ml-6">Rules</a>
+            </div>
+            <div class="p-2 px-2 mt-4 ml-5 text-xl font-bold  flex justify-start">
                 <i class="far fa-file-medical"></i>
                 <a href="{{route('dashboard')}}" class="ml-9">Add Transaction</a>
             </div>

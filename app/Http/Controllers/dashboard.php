@@ -263,6 +263,10 @@ class dashboard extends Controller
         return view("rockstars");
     }
 
+    public function rules(){
+        return view("rules");
+    }
+
     public function test(Request $req){
         $id=Crypt::decrypt($req->id);
         if(User::find($id))
