@@ -115,6 +115,7 @@
     xmlHttp.send( null );
     return xmlHttp.responseText;
 }
+
     function set_rmuser_id(id)
     {
        var btn=document.getElementById("rmform_value");

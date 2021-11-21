@@ -35,6 +35,8 @@ Route::get('add_roommates',[dashboard::class,'add_roommates'])->name('add_roomma
 Route::get('history',[dashboard::class,'history'])->name('history');
 
 Route::get('rules',[dashboard::class,'rules'])->name('rules');
+Route::POST('RemoveTransaction',[dashboard::class,'RemoveTransaction'])->name('RemoveTransaction');
+
 
 Route::get('portfolio',[dashboard::class,'portfolio'])->name('portfolio');
 Route::get('DoneRecive',[dashboard::class,'DoneRecive'])->name('DoneRecive');

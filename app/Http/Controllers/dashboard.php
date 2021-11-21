@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\lib;
 use App\Models\ltran;
 use App\Models\llib;
+use App\Models\tran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
@@ -277,6 +278,19 @@ class dashboard extends Controller
         }
         //return response(["msg"=>$userName." Removed Sucessfully","id"=>$id],200);
         return redirect('add_roommates')->with('status', 'Removed Sucessfully');;
+    }
+
+
+    public function RemoveTransaction(Request $req){
+        $id=Crypt::decrypt($req->id);
+        if(tran::find($id))
+        {
+            $user = tran::find($id);
+            $userName=$user->name;
+            $user->delete();
+        }
+        //return response(["msg"=>$userName." Removed Sucessfully","id"=>$id],200);
+        return redirect('transactions')->with('status', 'Removed Sucessfully');;
     }
 
     //DoneRecive

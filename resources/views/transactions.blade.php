@@ -74,9 +74,15 @@
 
 
                     </div>
+                    @php
+                        $euid= Crypt::encrypt($d['tid']);
+                    @endphp
                     <div class="relative overflow-hidden transition-all max-h-0 duration-700" style="" x-ref="container1" x-bind:style="selected == 1 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">
                         <div class="p-6">
                          {{$d['uname']}}
+                         @if (Auth::user()->name == $d['towner'] )
+                         <button onclick="set_rmuser_id('{{$euid}}')" type="button" class="font-bold modal-open text-white bg-red-400 border border-red-700 px-2 py-1 rounded-full">Remove</button>
+                         @endif
                             {{-- @php
                              $unames=explode(',',$d['uname']);
                              foreach($unames as $n)
@@ -89,6 +95,39 @@
 
                     @endforeach
 
+                    <div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
+                        <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+
+                        <div class="modal-container  w-11/12 md:max-w-md mx-auto z-50 ">
+
+
+                            <div class=" flex flex-col p-4 bg-gray-300 bg-opacity-full shadow-md hover:shodow-lg rounded-2xl">
+                                <div class="flex justify-end items-center pb-1">
+                                    <div class="modal-close cursor-pointer z-50">
+                                        <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                                        <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="mx-5 p-2 w-full">
+                                    <div class="flex justify-center ">
+                                            <div class="p-2 bg-white mr-5 w-full rounded-xl border border-gray-200 text-center text-xl font-bold">Are You Sure? </div>
+                                    </div>
+                                    <div class="flex justify-between mx-5 mt-4">
+
+                                        <button  class="modal-close bg-white px-3 py-2 border-2 rounded-md text-gray-700 font-bold  border-gray-500 text-xl">Cancel</button>
+
+                                        <form id="rmform" action="{{route('RemoveTransaction')}}" method="POST">
+                                        @csrf
+                                        <input id="rmform_value" name="id" value="N" type="hidden">
+
+                                        </form>
+                                        <button  onclick="rmuser()" id="modelbtn" class="bg-red-500 mr-5 px-3 py-2 border-2 rounded-md text-white font-bold  border-red-800 text-xl">Yes Remove</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
 
@@ -99,6 +138,78 @@
     </div>
 
 
+    @if (session('status'))
+    <script>
+        swal('{{ session('status') }}', '', 'success');
+    </script>
+    @endif
+
+    <script>
+        function httpGet(theUrl)
+    {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+        xmlHttp.send( null );
+        return xmlHttp.responseText;
+    }
+
+        function set_rmuser_id(id)
+        {
+           var btn=document.getElementById("rmform_value");
+           btn.value=id;
+        }
+        function rmuser()
+        {
+           var f=document.getElementById("rmform");
+           f.submit();
+        }
+    </script>
+
+
+
+
+<script>
+    var openmodal = document.querySelectorAll('.modal-open')
+    for (var i = 0; i < openmodal.length; i++) {
+    openmodal[i].addEventListener('click', function(event){
+        event.preventDefault()
+
+        toggleModal()
+    })
+    }
+
+    const overlay = document.querySelector('.modal-overlay')
+    overlay.addEventListener('click', toggleModal)
+
+    var closemodal = document.querySelectorAll('.modal-close')
+    for (var i = 0; i < closemodal.length; i++) {
+    closemodal[i].addEventListener('click', toggleModal)
+    }
+
+    document.onkeydown = function(evt) {
+    evt = evt || window.event
+    var isEscape = false
+    if ("key" in evt) {
+        isEscape = (evt.key === "Escape" || evt.key === "Esc")
+    } else {
+        isEscape = (evt.keyCode === 27)
+    }
+    if (isEscape && document.body.classList.contains('modal-active')) {
+        toggleModal()
+    }
+    };
+
+
+    function toggleModal () {
+    const body = document.querySelector('body')
+    const modal = document.querySelector('.modal')
+    modal.classList.toggle('opacity-0')
+    modal.classList.toggle('pointer-events-none')
+    body.classList.toggle('modal-active')
+    }
+
+
+</script>
 
 
 @endsection
