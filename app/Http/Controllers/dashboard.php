@@ -60,6 +60,71 @@ class dashboard extends Controller
         return view("transactions",['users'=>$users,'data'=>$data]);
     }
 
+	    public function balancesheet2(Request $req){
+
+        $users=User::all();
+        $owner=$req->user();
+        $name=$owner->name;
+        $id=$owner->id;
+        $data=[];
+		$sts=['a'=>0,'l'=>0];
+        $AssetsData=DB::select(DB::raw('SELECT libs.luid,ifnull(sum(libs.lamt),0) AS myasset  FROM trans LEFT JOIN libs ON trans.tid=libs.ltid and trans.towner='.$id.' and libs.lsts=1 GROUP BY libs.luid;'));
+
+        $LibsData=DB::select(DB::raw('SELECT trans.towner,ifnull(sum(libs.lamt),0) AS mylib FROM trans LEFT JOIN libs ON trans.tid=libs.ltid and libs.luid='.$id.' and libs.lsts=1 GROUP BY trans.towner;'));
+
+        foreach($AssetsData as $a)
+        {
+            $data[$a->luid]=['id'=>$a->luid,'myasset'=>$a->myasset,'mylib'=>0];
+        }
+
+        foreach($LibsData as $l)
+        {
+            if(array_key_exists($l->towner,$data))
+            {
+                $data[$l->towner]['mylib']=$l->mylib;
+            }
+            else{
+                $data[$l->towner]['id']=$l->towner;
+                $data[$l->towner]['myasset']=0;
+                $data[$l->towner]['mylib']=$l->mylib;
+
+            }
+        }
+        //dd($data[2]->id);
+        $BalSheet=[];
+        foreach($data as $d)
+        {
+            $BalSheet[$d['id']]=['id'=>$d['id'],'bal'=>$d['myasset']-$d['mylib']];
+			if($BalSheet[$d['id']]['bal'] < 0)
+			{
+				$sts['l']=$sts['l'] + abs($BalSheet[$d['id']]['bal']);
+			}
+			else
+			{
+				$sts['a']=$sts['a'] + abs($BalSheet[$d['id']]['bal']);
+			}
+        }
+
+        foreach($BalSheet as $b)
+        {
+            //dd($b);
+            if($b['id']!=null)
+            {
+            if($b['bal']==strval(0) || $b['bal']==0 )
+            {
+                $this->ManualDoneRecive($id,$b['id']);
+            }
+            }
+        }
+
+
+	//dd($BalSheet,$sts);
+
+
+        return view("portfolio",["AssetSum"=>$sts['a'],"LibsSum"=>$sts['l']]);
+    }
+	
+
 
     public function balancesheet(Request $req){
 
@@ -115,6 +180,8 @@ class dashboard extends Controller
 
         return view('balancesheet',['users'=>$users,'BalSheet'=>$BalSheet]);
     }
+	
+
 
     public function liabalities(Request $req){
         $users=User::all();
@@ -252,8 +319,8 @@ class dashboard extends Controller
         // }
        // dd($data);
 
-       $RData=DB::select(DB::raw('SELECT * FROM ltrans WHERE ltrans.ltowner='.$id.';'));
-       $PData=DB::select(DB::raw('SELECT * FROM ltrans WHERE ltrans.ltremarks='.$id.';'));
+       $RData=DB::select(DB::raw('SELECT * FROM ltrans WHERE ltrans.ltowner='.$id.' order by ltrans.ltdate desc ;'));
+       $PData=DB::select(DB::raw('SELECT * FROM ltrans WHERE ltrans.ltremarks='.$id.' order by ltrans.ltdate desc ;'));
 
            //dd($users);
 

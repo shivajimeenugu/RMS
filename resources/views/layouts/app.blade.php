@@ -3,6 +3,53 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    {{-- <script src="/__/firebase/8.10.1/firebase-messaging.js"></script> --}}
+    <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-analytics.js";
+    import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-messaging.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+        apiKey: "AIzaSyBm5XsI_aa2OCWCOEA0oy0DcofxLn9RWdY",
+        authDomain: "room-management-system-17ebc.firebaseapp.com",
+        projectId: "room-management-system-17ebc",
+        storageBucket: "room-management-system-17ebc.appspot.com",
+        messagingSenderId: "412544328439",
+        appId: "1:412544328439:web:fb43f9aabf25d61a0869f2",
+        measurementId: "G-SQWMEFMX5B"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+
+
+        // Get registration token. Initially this makes a network call, once retrieved
+        // subsequent calls to getToken will return from cache.
+        const messaging = getMessaging();
+        getToken(messaging, { vapidKey: 'AAAAYA2O4vc:APA91bHS6m5QBWzOnWQHr5E1Zc56IOHnoaSVXX39JwvD7F2l2iGaHPEk4ixP5OwONsgciWu8s54LWdX2q-KS2VG-z8UPZ2hlgFiR13b4cgClv_7mlHBDKmVX1p4ReIyVJYb-pX-WaVbH' }).then((currentToken) => {
+        if (currentToken) {
+            // Send the token to your server and update the UI if necessary
+            // ...
+            console.log('Sivaji FCM Token',currentToken);
+            // alert(currentToken);
+        } else {
+            // Show permission request UI
+            console.log('No registration token available. Request permission to generate one.');
+            // alert(currentToken);
+            // ...
+        }
+        }).catch((err) => {
+        console.log('An error occurred while retrieving token. ', err);
+        // alert(currentToken);
+        // ...
+        });
+    </script>
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">

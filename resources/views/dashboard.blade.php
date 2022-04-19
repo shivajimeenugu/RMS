@@ -29,7 +29,7 @@
                 <form action="AddTransaction" id="tform" method="POST">
                     @csrf
                 <div class="mx-10 mt-5">
-                    <input  type="Int" name="amount" id="amount" placeholder="Amount" class="px-4 py-4  text-lg placeholder-gray-600 font-bold rounded-lg border text-bold border-blue-400 text-gray-600 w-full" required>
+                    <input  type="number" name="amount" id="amount" placeholder="Amount" class="px-4 py-4  text-lg placeholder-gray-600 font-bold rounded-lg border text-bold border-blue-400 text-gray-600 w-full" required>
                 </div>
                 <div class="mt-4 mx-8 flex justify-center">
                     <input type="text" name="remarks" id="title" placeholder="Item Details" class="px-2 py-2 border border-blue-400 placeholder-gray-600 font-bold pl-5  rounded w-8/12" required>
