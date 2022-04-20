@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CoreController;
+use App\Http\Controllers\PushController;
 use App\Http\Controllers\dashboard;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -43,3 +44,7 @@ Route::POST('RemoveTransaction',[dashboard::class,'RemoveTransaction'])->name('R
 Route::get('portfolio',[dashboard::class,'balancesheet2'])->name('portfolio');
 Route::get('DoneRecive',[dashboard::class,'DoneRecive'])->name('DoneRecive');
 Route::post('AddTransaction',[CoreController::class,'AddTransaction']);
+
+Route::post('push',[PushController::class,'store']);
+Route::get('push',[PushController::class,'push'])->name('push');
+
