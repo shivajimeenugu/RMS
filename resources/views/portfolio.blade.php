@@ -65,7 +65,8 @@
                 </div>
 
                 <div class="p-4 text-xl text-red-900 font-bold  ">
-				<p class="p-4 bg-blue-600 mt-2 rounded-lg px-2 py-1   text-white">Portfolio is updated...😁</p> 
+				<p class="p-4 bg-blue-600 mt-2 rounded-lg px-2 py-1   text-white">Transaction History is updated.😁</p>
+                <p class="p-4 bg-blue-600 mt-2 rounded-lg px-2 py-1   text-white">You Will Get Notificatons Now.😁</p>
                   <!--  <p class="p-4 bg-blue-600 mt-2 rounded-lg px-2 py-1   text-white">*Rules</p> -->
 
                   <!--  <p class="p-4 bg-blue-600 mt-2 rounded-lg px-2 py-1  text-white" ><a href="{{route('transactions')}}" >Now You Can Delete your transactions.. </a></p> -->

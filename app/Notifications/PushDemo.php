@@ -31,10 +31,10 @@ class PushDemo extends Notification implements ShouldQueue
     {
         // dd($notifiable);
         return (new WebPushMessage)
-            ->title('I\'m Notification Sent BY '.$this->details['Sender'])
-            ->icon('/notification-icon.png')
-            ->body('Horry!, Push Notifications work!')
-            ->action('View App', '/rockstars');
+            ->title($this->details['title'])
+            ->icon('http://msivaji.in/rms/public/images/rms.gif')
+            ->body($this->details['body'])
+            ->action('Swipe Me', 'http://msivaji.in/rms/public');
     }
 
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Notifications\PushDemo;
 use App\Models\tran;
 use App\Models\lib;
 use Illuminate\Http\Request;
@@ -8,6 +9,9 @@ use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use League\CommonMark\Extension\CommonMark\Node\Block\ListData;
 use Illuminate\Support\Facades\Mail;
+use Auth;
+use Notification;
+
 class CoreController extends Controller
 {
 
@@ -34,6 +38,7 @@ class CoreController extends Controller
         // $remarks="test2";
 
        $user_id=$req->user()->id; //owner
+       $user_name=$req->user()->name;
         $amount=$req->amount;
         $members=$req->get('members');
         $partyCount=count($members);
@@ -50,9 +55,15 @@ class CoreController extends Controller
 
         $tid=$tran::all()->last()->tid;
 
+        // dd($members);
+        $notifibulusers=[];
         foreach($members as $mem )
         {
             //dd(strval($mem)==$user_id);
+
+            array_push($notifibulusers,intval($mem));
+            // dd(intval($mem),$notifibulusers);
+
             if(strval($mem)==$user_id)
             {
                 $lib=lib::create([
@@ -69,7 +80,25 @@ class CoreController extends Controller
                 'lamt'=>$perHead,
 
             ]);
+
+
         }
+
+
+        try {
+
+            $data=[
+                "title"=>$user_name." added RS ".$perHead." To You",
+                "body"=>"Details: ".$remarks." "
+            ];
+            Notification::send(User::find($notifibulusers),new PushDemo($data));
+
+
+        } catch(Exception $e) {
+            // Do nothing
+        }
+
+
 
         }
 

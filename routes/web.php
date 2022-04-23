@@ -17,7 +17,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/transactions', [dashboard::class, 'transactions'])->name('transactions');
+Route::get('/transactions', [dashboard::class, 'transactions2'])->name('transactions');
+Route::get('/transactions2', [dashboard::class, 'transactions2'])->name('transactions2');
+
 Route::get('/', [dashboard::class, 'balancesheet2'])->name('home');
 Route::post('/test', [dashboard::class, 'test'])->name('test');
 

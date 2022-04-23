@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Notifications\PushDemo;
+use App\Notifications\RmsTestEmail;
 use App\Notifications\Test;
 use App\Models\User;
 use Auth;
@@ -43,7 +44,12 @@ class PushController extends Controller
         $user = Auth::user()->name;
         // dd($user);
         $data=["Sender"=>$user];
-        Notification::send(User::all(),new PushDemo($data));
+
+        Notification::send(User::find(1),new PushDemo($data));
+        Notification::send(User::find(1),new RmsTestEmail($data));
+
+
+        // if()
 
         return redirect()->back();
     }

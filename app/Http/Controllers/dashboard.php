@@ -60,6 +60,129 @@ class dashboard extends Controller
         return view("transactions",['users'=>$users,'data'=>$data]);
     }
 
+    public function transactions2(Request $req){
+        $users=User::all();
+        $owner=$req->user();
+        $name=$owner->name;
+        $id=$owner->id;
+        $data=[];
+        $LibData=[];
+
+        if($req->show ==  "all")
+        {
+
+        $TData_tid=DB::select(DB::raw('SELECT libs.ltid,GROUP_CONCAT(users.name) as uname FROM `libs`,users WHERE users.id=libs.luid GROUP BY libs.ltid;'));
+
+        foreach($TData_tid as $tl)
+        {
+            $LibData[$tl->ltid]=['ltid'=>$tl->ltid,'uname'=>$tl->uname];
+        }
+       // dd($LibData['49']['uname']);
+
+        $TData=DB::select(DB::raw('SELECT trans.tid,trans.tdate,trans.tremarks,trans.tamt,users.name FROM trans,users where trans.towner=users.id and trans.tid IN (select distinct libs.ltid from libs)  ORDER BY trans.created_at DESC;'));
+
+        foreach($TData as $t)
+        {
+            $data[$t->tid]=[
+                'tid'=>$t->tid,
+                'tdate'=>$t->tdate,
+                'tremarks'=>$t->tremarks,
+                'tamt'=>$t->tamt,
+                'towner'=>$t->name,
+                'uname'=>$LibData[$t->tid]['uname']
+            ];
+        }
+
+        }
+        else if($req->show == "owner")
+        {
+
+            $TData_tid=DB::select(DB::raw('SELECT libs.ltid,GROUP_CONCAT(users.name) as uname FROM `libs`,users WHERE users.id=libs.luid GROUP BY libs.ltid;'));
+
+            foreach($TData_tid as $tl)
+            {
+                $LibData[$tl->ltid]=['ltid'=>$tl->ltid,'uname'=>$tl->uname];
+            }
+           // dd($LibData['49']['uname']);
+
+            $TData=DB::select(DB::raw('SELECT trans.tid,trans.tdate,trans.tremarks,trans.tamt,users.name,users.id FROM trans,users where trans.towner=users.id and trans.tid IN (select distinct libs.ltid from libs )  ORDER BY trans.created_at DESC;'));
+
+            foreach($TData as $t)
+            {
+                // dd($t,$owner);
+                if($t->id == $id)
+                {
+                $data[$t->tid]=[
+                    'tid'=>$t->tid,
+                    'tdate'=>$t->tdate,
+                    'tremarks'=>$t->tremarks,
+                    'tamt'=>$t->tamt,
+                    'towner'=>$t->name,
+                    'uname'=>$LibData[$t->tid]['uname']
+                ];
+                }
+            }
+        }
+        else if($req->show ==  "party")
+        {
+            //and trans.towner=$id
+            $TData_tid=DB::select(DB::raw('SELECT libs.ltid,GROUP_CONCAT(users.name) as uname FROM `libs`,users WHERE users.id=libs.luid GROUP BY libs.ltid;'));
+
+            foreach($TData_tid as $tl)
+            {
+                $LibData[$tl->ltid]=['ltid'=>$tl->ltid,'uname'=>$tl->uname];
+            }
+           // dd($LibData['49']['uname']);
+
+            $TData=DB::select(DB::raw('SELECT trans.tid,trans.tdate,trans.tremarks,trans.tamt,users.name FROM trans,users where trans.towner=users.id and trans.tid IN (select distinct libs.ltid from libs where libs.luid='.$id.')  ORDER BY trans.created_at DESC;'));
+
+            foreach($TData as $t)
+            {
+                $data[$t->tid]=[
+                    'tid'=>$t->tid,
+                    'tdate'=>$t->tdate,
+                    'tremarks'=>$t->tremarks,
+                    'tamt'=>$t->tamt,
+                    'towner'=>$t->name,
+                    'uname'=>$LibData[$t->tid]['uname']
+                ];
+            }
+
+
+        }
+        else{
+            $TData_tid=DB::select(DB::raw('SELECT libs.ltid,GROUP_CONCAT(users.name) as uname FROM `libs`,users WHERE users.id=libs.luid GROUP BY libs.ltid;'));
+
+        foreach($TData_tid as $tl)
+        {
+            $LibData[$tl->ltid]=['ltid'=>$tl->ltid,'uname'=>$tl->uname];
+        }
+       // dd($LibData['49']['uname']);
+
+        $TData=DB::select(DB::raw('SELECT trans.tid,trans.tdate,trans.tremarks,trans.tamt,users.name FROM trans,users where trans.towner=users.id and trans.tid IN (select distinct libs.ltid from libs)  ORDER BY trans.created_at DESC;'));
+
+        foreach($TData as $t)
+        {
+            $data[$t->tid]=[
+                'tid'=>$t->tid,
+                'tdate'=>$t->tdate,
+                'tremarks'=>$t->tremarks,
+                'tamt'=>$t->tamt,
+                'towner'=>$t->name,
+                'uname'=>$LibData[$t->tid]['uname']
+            ];
+        }
+        }
+
+
+
+
+        //dd($LibData,$data);
+        //SELECT trans.tdate,trans.tremarks,trans.tamt,users.name FROM trans,users where trans.towner=users.id and trans.towner=1 ORDER BY trans.tdate DESC
+
+        return view("transactions2",['users'=>$users,'data'=>$data]);
+    }
+
 	    public function balancesheet2(Request $req){
 
         $users=User::all();
@@ -123,7 +246,7 @@ class dashboard extends Controller
 
         return view("portfolio",["AssetSum"=>$sts['a'],"LibsSum"=>$sts['l']]);
     }
-	
+
 
 
     public function balancesheet(Request $req){
@@ -180,7 +303,7 @@ class dashboard extends Controller
 
         return view('balancesheet',['users'=>$users,'BalSheet'=>$BalSheet]);
     }
-	
+
 
 
     public function liabalities(Request $req){

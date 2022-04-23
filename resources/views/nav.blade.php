@@ -34,12 +34,9 @@
             </div>
             <div class="p-2 px-2 mt-4 ml-5 text-xl font-bold  flex justify-start">
                 <i class="far fa-address-card"></i>
-                <a  href="{{route('rockstars')}}"  >About App</a>
+                <a  href="{{route('rockstars')}}" class="ml-7" > About App</a>
             </div>
-            <div class="p-2 px-2 mt-4 ml-5 text-xl font-bold  flex justify-start">
-                <i class="far fa-address-card"></i>
-                <a href="{{route('push')}}" class="ml-7">Test Notification</a>
-            </div>
+
 
 
 
