@@ -8,6 +8,7 @@ use App\Models\ltran;
 use App\Models\llib;
 use App\Models\tran;
 use App\Models\DutyDate;
+use App\Models\waterduty;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
@@ -430,7 +431,7 @@ class dashboard extends Controller
         $users=User::all();//->except($id);
         $dut=$this->GetDuty();
 
-        return view("alldut",["users"=>$users,"ownerid"=>$id,"dut"=>$dut]);
+        return view("alldut",["users"=>$users,"ownerid"=>$id,"dut"=>$dut,"waterdut"=>$this->getwaterduty()]);
     }
 
     public function history(Request $req){
@@ -675,28 +676,29 @@ class dashboard extends Controller
        function GetDuty()
        {
 
-        $start=date_create("2022-04-21");
+        $start=date_create("2022-04-22");
         // $ldate=DutyDate::find(1)->ldate;
         $data=[
             [24,22,3,23,19],
             [25,24,22,3,23],
-            [26,25,24,22,3],
-            [1,26,25,24,22],
-            [19,1,26,25,24],
-            [23,19,1,26,25],
-            [3,23,19,1,26],
-            [22,3,23,19,1]
+            [26,25,24,22,3],//24
+            [1,26,25,24,22],//25
+            [19,1,26,25,24],//26
+            [23,19,1,26,25],//27
+            [3,23,19,1,26],//28
+            [22,3,23,19,1]//29
         ];
 
 
-
+        // $date2=date_create("2022-04-25");
         $date2=date_create(date("Y-m-d"));
+
         // dd($date2);
         $diff=date_diff($start,$date2)->days;
 
         if($diff%8==0)
         {
-            $counter=7;
+            $counter=0;
         }
         else{
 
@@ -714,7 +716,7 @@ class dashboard extends Controller
             User::find($today[4])->name=>"Kitchen",
         ];
 
-
+        // dd($data,[$start,$date2],$diff,$counter,$data[$counter]);
         // $dutName=[
         //     "Sweeping",
         //     "Rice",
@@ -730,8 +732,55 @@ class dashboard extends Controller
 
         return $dut;
 
-        //dd($data,[$start,$date2],$diff,$data[$counter]);
+
        }
+
+
+       function incwaterduty(){
+        $counter=waterduty::find(1)->counter;
+        // waterduty::where('id',1)->update(['counter'=>$counter+1]);
+        if($counter!=3)
+        {
+        waterduty::where('id',1)->update(['counter'=>$counter+1]);
+        }
+        else{
+            waterduty::where('id',1)->update(['counter'=>0]);
+        }
+
+        return redirect()->back();
+       }
+
+       function decwaterduty(){
+        $counter=waterduty::find(1)->counter;
+        if($counter!=0)
+        {
+        waterduty::where('id',1)->update(['counter'=>$counter-1]);
+        }
+        else{
+            waterduty::where('id',1)->update(['counter'=>3]);
+        }
+        return redirect()->back();
+    }
+
+    function getwaterduty()
+    {
+        $counter=waterduty::find(1)->counter;
+        $data=[
+            [3,24],
+            [26,19],
+            [25,23],//24
+            [22,1]
+        ];
+
+        $workers=$data[$counter];
+
+        $dut=[
+            User::find($workers[0])->name,
+            User::find($workers[1])->name,
+        ];
+
+        return $dut;
+    }
 
 
 

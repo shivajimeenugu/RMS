@@ -58,7 +58,30 @@
                     @endforeach
 
                 </div>
+                <div class="mx-5 border-l-2 border-white rounded-xl bg-white  ">
+                    <div class="p-4 text-xl text-blue-700 font-bold ">
+                            Water Duty's
+                    </div>
+
+
+                    <div class="flex justify-center ">
+                        <a href="{{route('decwaterduty')}}" class="flex-initial text-gray-800 text-center bg-gray-300 px-4 py-2 m-2"><i class="fas fa-minus"></i></a>
+
+                        <div class="text-gray-800 text-center bg-gray-300 px-4 py-2 m-2">
+                            <p>{{$waterdut[0]}}</p>
+                            <p>{{$waterdut[1]}}</p>
+                        </div>
+
+                        <a href="{{route('incwaterduty')}}" class="flex-initial text-gray-800 text-center bg-gray-300 px-4 py-2 m-2"><i class="fas fa-plus"></i></a>
+                      </div>
+
+                </div>
             </div>
+
+
+
+
+
         </div>
 
     </div>

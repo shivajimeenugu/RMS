@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/d', [dashboard::class, 'GetDuty'])->name('d');
+Route::get('/incwaterduty', [dashboard::class, 'incwaterduty'])->name('incwaterduty');
+Route::get('/decwaterduty', [dashboard::class, 'decwaterduty'])->name('decwaterduty');
 Route::get('/sendupdate', [CoreController::class, 'sendupdates'])->name('sendupdates');
 
 //ShowAllDutys
