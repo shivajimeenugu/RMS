@@ -42,19 +42,37 @@
                         Portfolio
                 </div>
                 <div class="p-4 text-xl text-gray-900 font-bold ">
-                    <p>Your</p>
+
                     <p>Total Assets</p>
                     <p class="bg-blue-600 mt-2 rounded-lg px-2 py-1 text-2xl w-6/12 text-white">{{  $AssetSum}}</p>
                 </div>
                 <div class="p-4 text-xl text-gray-900 font-bold ">
-                    <p>Your</p>
+
                     <p>Total Liabalities</p>
                     <p class="bg-blue-600 mt-2 mb-4 rounded-lg px-2 py-1 text-2xl w-6/12 text-white">{{$LibsSum}}</p>
                 </div>
 				<div class="p-4 text-xl text-gray-900 font-bold ">
-                    <p>Your</p>
+
                     <p>Total Balance</p>
                     <p class="bg-blue-600 mt-2 mb-4 rounded-lg px-2 py-1 text-2xl w-6/12 text-white">{{$AssetSum-$LibsSum}}</p>
+                </div>
+                <div class="p-4 text-xl text-gray-900 font-bold ">
+
+                    <p>Today Duty</p>
+                    <p class="bg-blue-600 mt-2 mb-4 rounded-lg px-2 py-1 text-2xl w-6/12 text-white">
+                    @if ($dut=="You Are Free")
+                    {{
+                        $dut."😁"
+                    }}
+                    @else
+                    {{
+                        $dut."😥"
+                    }}
+                    @endif
+
+
+
+                    </p>
                 </div>
             </div>
             <br/>
@@ -65,7 +83,7 @@
                 </div>
 
                 <div class="p-4 text-xl text-red-900 font-bold  ">
-				<p class="p-4 bg-blue-600 mt-2 rounded-lg px-2 py-1   text-white">Transaction History is updated.😁</p>
+				<p class="p-4 bg-blue-600 mt-2 rounded-lg px-2 py-1   text-white">Today Duty is in Testing..😁</p>
                 <p class="p-4 bg-blue-600 mt-2 rounded-lg px-2 py-1   text-white">You Will Get Notificatons Now.😁</p>
                   <!--  <p class="p-4 bg-blue-600 mt-2 rounded-lg px-2 py-1   text-white">*Rules</p> -->
 

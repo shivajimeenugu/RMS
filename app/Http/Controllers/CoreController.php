@@ -201,5 +201,30 @@ class CoreController extends Controller
     }
 
 
+    function sendupdates(Request $req)
+    {
+        if($req->title && $req->body)
+        {
+
+        try {
+
+            $data=[
+                "title"=>$req->title,
+                "body"=>$req->body
+            ];
+            Notification::send(User::all(),new PushDemo($data));
+
+
+        } catch(Exception $e) {
+            // Do nothing
+        }
+        return $req;
+    }
+
+    return "No Update Sent";
+
+    }
+
+
 
 }

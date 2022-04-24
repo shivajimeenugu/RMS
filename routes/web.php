@@ -16,7 +16,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/d', [dashboard::class, 'GetDuty'])->name('d');
+Route::get('/sendupdate', [CoreController::class, 'sendupdates'])->name('sendupdates');
 
+//ShowAllDutys
+Route::get('/ShowAllDutys', [dashboard::class, 'ShowAllDutys'])->name('ShowAllDutys');
 Route::get('/transactions', [dashboard::class, 'transactions2'])->name('transactions');
 Route::get('/transactions2', [dashboard::class, 'transactions2'])->name('transactions2');
 

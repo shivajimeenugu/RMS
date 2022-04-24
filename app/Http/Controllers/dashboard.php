@@ -7,6 +7,7 @@ use App\Models\lib;
 use App\Models\ltran;
 use App\Models\llib;
 use App\Models\tran;
+use App\Models\DutyDate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
@@ -244,7 +245,10 @@ class dashboard extends Controller
 	//dd($BalSheet,$sts);
 
 
-        return view("portfolio",["AssetSum"=>$sts['a'],"LibsSum"=>$sts['l']]);
+
+    $dut=array_key_exists(User::find($id)->name,$this->GetDuty())?$this->GetDuty()[User::find($id)->name]:"You Are Free";
+//$this->GetDuty()[User::find($id)->name]
+        return view("portfolio",["AssetSum"=>$sts['a'],"LibsSum"=>$sts['l'],"dut"=>$dut]);
     }
 
 
@@ -340,10 +344,16 @@ class dashboard extends Controller
     }
 
     public function portfolio(Request $req){
+
+
         $users=User::all();
         $owner=$req->user();
+
         $name=$owner->name;
         $id=$owner->id;
+
+
+
         $data=[];
         $AssetsData=DB::select(DB::raw('SELECT libs.luid,ifnull(sum(libs.lamt),0) AS myasset  FROM trans LEFT JOIN libs ON trans.tid=libs.ltid and trans.towner='.$id.' and libs.lsts=1 GROUP BY libs.luid;'));
 
@@ -410,6 +420,17 @@ class dashboard extends Controller
         $users=User::all();//->except($id);
 
         return view("add_roommates",["users"=>$users,"ownerid"=>$id]);
+    }
+
+
+    public function ShowAllDutys(Request $req){
+        $owner=$req->user();
+        $name=$owner->name;
+        $id=$owner->id;
+        $users=User::all();//->except($id);
+        $dut=$this->GetDuty();
+
+        return view("alldut",["users"=>$users,"ownerid"=>$id,"dut"=>$dut]);
     }
 
     public function history(Request $req){
@@ -587,6 +608,130 @@ class dashboard extends Controller
         return true;
        }
 
+
+
+       function dutyTimeTable($id)
+       {
+
+        $start=date_create("2022-04-21");
+        // $ldate=DutyDate::find(1)->ldate;
+        $data=[
+            [24,22,3,23,19],
+            [25,24,22,3,23],
+            [26,25,24,22,3],
+            [1,26,25,24,22],
+            [19,1,26,25,24],
+            [23,19,1,26,25],
+            [3,23,19,1,26],
+            [22,3,23,19,1]
+        ];
+
+
+
+        $date2=date_create(date("Y-m-d"));
+        // dd($date2);
+        $diff=date_diff($start,$date2)->days;
+
+        if($diff%8==0)
+        {
+            $counter=7;
+        }
+        else{
+
+            $counter=$diff%8;
+        }
+
+        $today=$data[$counter];
+
+
+        // $dut=[
+        //     "Sweeping"=>User::find($today[0])->name,
+        //     "Rice"=>User::find($today[1])->name,
+        //     "Curries"=>User::find($today[2])->name,
+        //     "Washing"=>User::find($today[3])->name,
+        //     "Kitchen"=>User::find($today[4])->name,
+        // ];
+
+
+        $dutName=[
+            "Sweeping",
+            "Rice",
+            "Curries",
+            "Washing",
+            "Kitchen",
+        ];
+
+        $mydut=array_search($id,$today)?array_search($id,$today):"None";
+
+
+        $mydutname=$mydut!="None"?$dutName[$mydut]:"You Are Free";
+
+        return $mydutname;
+
+        //dd($data,[$start,$date2],$diff,$data[$counter]);
+       }
+
+
+       function GetDuty()
+       {
+
+        $start=date_create("2022-04-21");
+        // $ldate=DutyDate::find(1)->ldate;
+        $data=[
+            [24,22,3,23,19],
+            [25,24,22,3,23],
+            [26,25,24,22,3],
+            [1,26,25,24,22],
+            [19,1,26,25,24],
+            [23,19,1,26,25],
+            [3,23,19,1,26],
+            [22,3,23,19,1]
+        ];
+
+
+
+        $date2=date_create(date("Y-m-d"));
+        // dd($date2);
+        $diff=date_diff($start,$date2)->days;
+
+        if($diff%8==0)
+        {
+            $counter=7;
+        }
+        else{
+
+            $counter=$diff%8;
+        }
+
+        $today=$data[$counter];
+
+
+        $dut=[
+            User::find($today[0])->name => "Sweeping",
+            User::find($today[1])->name=>"Rice",
+            User::find($today[2])->name=>"Curries",
+            User::find($today[3])->name=>"Washing",
+            User::find($today[4])->name=>"Kitchen",
+        ];
+
+
+        // $dutName=[
+        //     "Sweeping",
+        //     "Rice",
+        //     "Curries",
+        //     "Washing",
+        //     "Kitchen",
+        // ];
+
+        // $mydut=array_search($id,$today)?array_search($id,$today):"None";
+
+
+        // $mydutname=$mydut!="None"?$dutName[$mydut]:"You Are Free";
+
+        return $dut;
+
+        //dd($data,[$start,$date2],$diff,$data[$counter]);
+       }
 
 
 
