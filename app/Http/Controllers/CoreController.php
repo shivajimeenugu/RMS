@@ -82,21 +82,10 @@ class CoreController extends Controller
             ]);
 
 
-        }
+            }
 
 
-        try {
 
-            $data=[
-                "title"=>$user_name." added RS ".$perHead." To You",
-                "body"=>"Details: ".$remarks." "
-            ];
-            Notification::send(User::find($notifibulusers),new PushDemo($data));
-
-
-        } catch(Exception $e) {
-            // Do nothing
-        }
 
 
 
@@ -124,6 +113,18 @@ class CoreController extends Controller
 
         // $data=DB::select(DB::raw('insert into '.$OwnerTableName.' (transactions_id,participants) values('.$TransactionDetails->id.',"'.$partys.'")'));
 
+        try {
+
+            $data=[
+                "title"=>$user_name." added RS ".$perHead." To You",
+                "body"=>"Details: ".$remarks." "
+            ];
+            Notification::send(User::find($notifibulusers),new PushDemo($data));
+
+
+        } catch(Exception $e) {
+            // Do nothing
+        }
        return redirect('dashboard')->with('status', 'Transaction Added');
     }
 

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Notifications\PushDemo;
 use App\Models\User;
 use App\Models\lib;
 use App\Models\ltran;
@@ -12,6 +12,7 @@ use App\Models\waterduty;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
+use Notification;
 class dashboard extends Controller
 {
     public function __construct()
@@ -676,7 +677,7 @@ class dashboard extends Controller
        function GetDuty()
        {
 
-        $start=date_create("2022-04-22");
+        $start=date_create("2022-04-21");
         // $ldate=DutyDate::find(1)->ldate;
         $data=[
             [24,22,3,23,19],
@@ -736,7 +737,7 @@ class dashboard extends Controller
        }
 
 
-       function incwaterduty(){
+       function incwaterduty(Request $req){
         $counter=waterduty::find(1)->counter;
         // waterduty::where('id',1)->update(['counter'=>$counter+1]);
         if($counter!=3)
@@ -747,10 +748,20 @@ class dashboard extends Controller
             waterduty::where('id',1)->update(['counter'=>0]);
         }
 
+        try {
+            $data=[
+                "title"=>$req->user()->name." Incremented Water Duty Counter",
+                "body"=>"Next ".$this->getwaterduty()[0]." and ".$this->getwaterduty()[1]." will go"
+            ];
+            Notification::send(User::all(),new PushDemo($data));
+        } catch(Exception $e) {
+            // Do nothing
+        }
+
         return redirect()->back();
        }
 
-       function decwaterduty(){
+       function decwaterduty(Request $req){
         $counter=waterduty::find(1)->counter;
         if($counter!=0)
         {
@@ -759,6 +770,18 @@ class dashboard extends Controller
         else{
             waterduty::where('id',1)->update(['counter'=>3]);
         }
+
+
+        try {
+            $data=[
+                "title"=>$req->user()->name." Decremented Water Duty Counter",
+                "body"=>"Next ".$this->getwaterduty()[0]." and ".$this->getwaterduty()[1]." will go"
+            ];
+            Notification::send(User::all(),new PushDemo($data));
+        } catch(Exception $e) {
+            // Do nothing
+        }
+
         return redirect()->back();
     }
 
